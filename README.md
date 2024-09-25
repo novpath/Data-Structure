@@ -8,6 +8,8 @@
 
 ## 注意事项
 
+* 使用Typora 1.9.5 Version编辑器编辑，其它md编辑器可能有部分语法无法支持。
+
 - 有任何疑问或者问题欢迎联系：[novpath@gmail.com](mailto:novpath@gmail.com)。 
 
 ## Commit-emoji 图例
