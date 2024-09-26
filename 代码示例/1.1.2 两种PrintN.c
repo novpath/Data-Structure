@@ -3,26 +3,26 @@
 #include <math.h>
 clock_t start, stop; 
 double duration;
-#define MAXN 100000 /* 数据量 */
+#define MAXN 10000 /* 数据量 */
 void PrintN1 ( int N );
 void PrintN2 ( int N );
+void run(void(*f)(int), int case_n)
+{
+	start = clock();
+	(*f)(MAXN); 
+	stop = clock();
+	duration = ((double)(stop - start))/CLK_TCK; 
+	printf("ticks%d = %f\n", case_n, (double)(stop - start));
+	printf("duration%d = %6.2e\n", case_n, duration);
+}
+
 int main ()
 { 
-    int i;
-	double a[MAXN]; /* 存储多项式的系数 */
-	for ( i=0; i<MAXN; i++ ) a[i] = (double)i; 
-	start = clock();
-	PrintN1(MAXN); 
-	stop = clock();
-	duration = ((double)(stop - start))/CLK_TCK; 
-	printf("ticks1 = %f\n", (double)(stop - start));
-	printf("duration1 = %6.2e\n", duration);
-	start = clock();
-	PrintN2(MAXN); 
-	stop = clock();
-	duration = ((double)(stop - start))/CLK_TCK; 
-	printf("ticks2 = %f\n", (double)(stop - start));
-	printf("duration2 = %6.2e\n", duration);
+	run(PrintN1, 1);
+	getchar();
+	system("cls");
+	run(PrintN2, 2);
+	
 	return 0;
 }
 void PrintN1 ( int N )
