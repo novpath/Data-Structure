@@ -1,6 +1,6 @@
-#include <stdio.h>
+/* SWUST OJ 1036*/
 
-/* SWUST OJ 1036 “——È÷§ */
+#include <stdio.h>
 
 int ArrMainElement(int A[], int n)
 {

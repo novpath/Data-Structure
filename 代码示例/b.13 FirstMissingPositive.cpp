@@ -1,6 +1,6 @@
-#include <stdio.h>
-
 /* leetcode 41 缺失的第一个正数 */
+
+#include <stdio.h>
 
 int FirstMissingPositive(int A[], int n)
 {

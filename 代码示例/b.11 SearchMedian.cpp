@@ -1,6 +1,6 @@
-#include <stdio.h>
-
 /* PTA 进阶实验 1-3.1 两个有序序列的中位数 OJ 已验证*/
+
+#include <stdio.h>
 
 int SearchMedian(int A[], int B[], int n)
 {
