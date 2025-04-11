@@ -12,60 +12,44 @@ bool InitList(LinkList &L);
 bool ListInsert(LinkList &L, int i, ElementType e);
 void PrintList(LinkList &L);
 
-void DeleteListX(LinkList &L, ElementType x)
+LinkList PartitionList(LinkList &LA)
 {
-    if (L == NULL || L->next == NULL)
-        return ;
-    LNode *p = L->next, *pre = L;     // 初始化 p 和 pre
+    if (LA == NULL || LA->next == NULL) return LA;
+    LinkList LB = (LinkList)malloc(sizeof(LNode)); // 创建 LB 的头结点
+    LB->next = NULL;                               // 初始化  LB 表
+    
+    LNode *p = LA->next, *q;                       // 工作指针指向第一个数据结点，q 用来之后暂存后继
+    LNode *ra = LA;                                // 生成指向尾结点的指针 ra
     while (p != NULL) {
-        if (p->data == x) {
-            pre->next = p->next;      // 待删结点从链表中断开
-            free(p);                  // 释放待删结点空间
-            p = pre->next;            // p 指针后移
-        } else {                      // 否则，pre 和 p 同步后移
-            pre = p;
-            p = pre->next;            // p 指针后移
+        ra->next = p;                              // 将 *p 链到 A 的表尾
+        ra = p;
+        p = p->next;
+        if (p != NULL) {
+            q = p->next;                           // 头插后，*p 将断链，因此用 q 记忆 *p 后继
+            p->next = LB->next;                    // 将 *p 插入链表 LB 的表头
+            LB->next = p;
+            p = q;
         }
     }
-}
-
-void FilterListByNoneX(LinkList &L, ElementType x)
-{
-    if (L == NULL || L->next == NULL)
-        return ;
-    LNode *r = L, *p = L->next;    // r 指向尾结点(注意和尾指针的区别)，初始化 r、p 指针
-    while (p != NULL) {                
-        if (p->data != x) {        // 不为 x 的结点尾插法连接到 L 尾部
-            r->next = p;
-            r = p;
-            p = p->next;           // p 指针后移
-        } else {                   // 扫描到的结点值为 x 时将其释放
-            LNode *q = p;
-            p = p->next;           // p 指针后移
-            free(q);
-        }
-    }
-    r->next = NULL;                // 插入结束后置尾结点指针为 NULL
+    ra->next = NULL;    // A 链表尾部 next 域置空
+    return LB;
 }
 
 int main()
 {
-	LNode *L = (LNode *)malloc(sizeof(LNode));
-	InitList(L);
-	ListInsert(L, 1, 1);
-	ListInsert(L, 2, 1);
-	ListInsert(L, 3, 3);
-	ListInsert(L, 4, 1);
-	ListInsert(L, 5, 5);
-	DeleteListX(L, 1); 
-	PrintList(L);
+	LNode *LA = (LNode *)malloc(sizeof(LNode));
+	LNode *LB;
+	InitList(LA);
 	
+	for (int i = 0; i < 10; i++) {
+		ListInsert(LA, i + 1, i);
+	}
+	PrintList(LA);
 	printf("\n");
-	ListInsert(L, 3, 3);
-	ListInsert(L, 4, 5);
-	ListInsert(L, 5, 5);
-	FilterListByNoneX(L, 3); 
-	PrintList(L);
+	LB = PartitionList(LA);
+	PrintList(LA);
+	printf("\n");
+	PrintList(LB);
 	
 	return 0;
 }

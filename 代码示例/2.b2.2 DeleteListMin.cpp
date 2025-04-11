@@ -12,59 +12,36 @@ bool InitList(LinkList &L);
 bool ListInsert(LinkList &L, int i, ElementType e);
 void PrintList(LinkList &L);
 
-void DeleteListX(LinkList &L, ElementType x)
+bool DeleteListMin(LinkList &L)
 {
     if (L == NULL || L->next == NULL)
-        return ;
-    LNode *p = L->next, *pre = L;     // 初始化 p 和 pre
+        return false;
+    LNode *prep = L, *p = prep->next;  // p 为工作指针，pre 指向其前驱
+    LNode  *premin = L, *min = p;      // 保存最小值结点及其前驱
     while (p != NULL) {
-        if (p->data == x) {
-            pre->next = p->next;      // 待删结点从链表中断开
-            free(p);                  // 释放待删结点空间
-            p = pre->next;            // p 指针后移
-        } else {                      // 否则，pre 和 p 同步后移
-            pre = p;
-            p = pre->next;            // p 指针后移
+        if (p->data < min->data) {
+            min = p;                   // 找到更小的结点更新前驱指针及指针
+            premin = prep;
         }
+        prep = p;                       // 继续扫描下一个结点
+        p = p->next;
     }
-}
-
-void FilterListByNoneX(LinkList &L, ElementType x)
-{
-    if (L == NULL || L->next == NULL)
-        return ;
-    LNode *r = L, *p = L->next;    // r 指向尾结点(注意和尾指针的区别)，初始化 r、p 指针
-    while (p != NULL) {                
-        if (p->data != x) {        // 不为 x 的结点尾插法连接到 L 尾部
-            r->next = p;
-            r = p;
-            p = p->next;           // p 指针后移
-        } else {                   // 扫描到的结点值为 x 时将其释放
-            LNode *q = p;
-            p = p->next;           // p 指针后移
-            free(q);
-        }
-    }
-    r->next = NULL;                // 插入结束后置尾结点指针为 NULL
+    premin->next = min->next;           // 删除最小值结点
+    free(min);
+    return true;
 }
 
 int main()
 {
 	LNode *L = (LNode *)malloc(sizeof(LNode));
 	InitList(L);
-	ListInsert(L, 1, 1);
-	ListInsert(L, 2, 1);
+	ListInsert(L, 1, 2);
+	ListInsert(L, 2, 2);
 	ListInsert(L, 3, 3);
 	ListInsert(L, 4, 1);
 	ListInsert(L, 5, 5);
-	DeleteListX(L, 1); 
-	PrintList(L);
+	DeleteListMin(L);
 	
-	printf("\n");
-	ListInsert(L, 3, 3);
-	ListInsert(L, 4, 5);
-	ListInsert(L, 5, 5);
-	FilterListByNoneX(L, 3); 
 	PrintList(L);
 	
 	return 0;

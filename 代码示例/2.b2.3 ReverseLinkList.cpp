@@ -12,40 +12,35 @@ bool InitList(LinkList &L);
 bool ListInsert(LinkList &L, int i, ElementType e);
 void PrintList(LinkList &L);
 
-void DeleteListX(LinkList &L, ElementType x)
+LinkList ReverseLinkList(LinkList &L)
 {
-    if (L == NULL || L->next == NULL)
-        return ;
-    LNode *p = L->next, *pre = L;     // 初始化 p 和 pre
-    while (p != NULL) {
-        if (p->data == x) {
-            pre->next = p->next;      // 待删结点从链表中断开
-            free(p);                  // 释放待删结点空间
-            p = pre->next;            // p 指针后移
-        } else {                      // 否则，pre 和 p 同步后移
-            pre = p;
-            p = pre->next;            // p 指针后移
-        }
+    if (L == NULL || L->next == NULL)  // L 合法性检查
+        return L;
+    LNode *p = L->next, *q;            // p 为工作指针，r 为 p 的后继，以防断链
+    L->next = NULL;                    // 头结点 L 的 next 域置为 NULL
+    while (p != NULL) {                // 依次将元素结点摘下
+        q = p->next;                   // 暂存 p 的后继
+        p->next = L->next;             // 将 p 结点插入到头结点之后
+        L->next = p;
+        p = q;
     }
+    return L; 
 }
 
-void FilterListByNoneX(LinkList &L, ElementType x)
+LinkList TriPtrReverse(LinkList L)
 {
-    if (L == NULL || L->next == NULL)
-        return ;
-    LNode *r = L, *p = L->next;    // r 指向尾结点(注意和尾指针的区别)，初始化 r、p 指针
-    while (p != NULL) {                
-        if (p->data != x) {        // 不为 x 的结点尾插法连接到 L 尾部
-            r->next = p;
-            r = p;
-            p = p->next;           // p 指针后移
-        } else {                   // 扫描到的结点值为 x 时将其释放
-            LNode *q = p;
-            p = p->next;           // p 指针后移
-            free(q);
-        }
+    if (L == NULL)      // 空表的时候直接返回，提高健壮性
+        return L;
+    LNode *pre, *p = L->next, *r = p->next;
+    p->next = NULL;     // 处理第一个结点
+    while (r != NULL) { // r 为空，则说明 p 为最后一个结点
+        pre = p;
+        p = r;
+        r = r->next;
+        p->next = pre;  // 指针反转
     }
-    r->next = NULL;                // 插入结束后置尾结点指针为 NULL
+    L->next = p;        // 处理最后一个结点
+    return L;
 }
 
 int main()
@@ -53,18 +48,20 @@ int main()
 	LNode *L = (LNode *)malloc(sizeof(LNode));
 	InitList(L);
 	ListInsert(L, 1, 1);
-	ListInsert(L, 2, 1);
+	ListInsert(L, 2, 2);
 	ListInsert(L, 3, 3);
-	ListInsert(L, 4, 1);
+	ListInsert(L, 4, 4);
 	ListInsert(L, 5, 5);
-	DeleteListX(L, 1); 
-	PrintList(L);
+    ReverseLinkList(L); 
 	
+	PrintList(L);
 	printf("\n");
-	ListInsert(L, 3, 3);
-	ListInsert(L, 4, 5);
-	ListInsert(L, 5, 5);
-	FilterListByNoneX(L, 3); 
+	ListInsert(L, 6, 6);
+	ListInsert(L, 7, 7);
+	ListInsert(L, 8, 8);
+	ListInsert(L, 9, 9);
+	ListInsert(L, 10, 10);
+	TriPtrReverse(L);
 	PrintList(L);
 	
 	return 0;
