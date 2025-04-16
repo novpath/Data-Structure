@@ -28,10 +28,9 @@ struct ListNode *findFirstCommonNode(struct ListNode *headA, struct ListNode *he
     } else {
         for (int i = 0; i < k; i++) q = q->next;
     }
-    while (p != NULL) {
-        if (p == q) return p;
+    while (p != NULL && p != q) {
         p = p->next;
         q = q->next;
     }
-    return NULL;
+    return p;
 }
