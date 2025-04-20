@@ -8,7 +8,7 @@
 
 ## 注意事项
 
-* 使用Typora(1.9.5 Version)编辑器编辑，部分md编辑器可能有些语法无法支持。
+* 使用Typora(1.9.5 Version)、Obsidian 1.8.9 编辑器编辑，部分md编辑器可能有些语法无法支持。
 * 除了某些特定行列外，表格内容默认左对齐，为了美观可以为正文表格内容设置CSS样式自动居中。
 
 * 有任何疑问或者问题欢迎联系：[novpath@gmail.com](mailto:novpath@gmail.com)。
