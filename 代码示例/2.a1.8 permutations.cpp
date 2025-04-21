@@ -5,14 +5,14 @@ int current[10];                  // 保存当前生成的排列序列
 int used[10] = {0};               // 标记数字是否已被使用，0 未用 / 1 已用
 
 void print_perm() {               // 打印当前生成的排列
-    for (int i = 0; i < n; i++) {
+    for (int i = 1; i <= n; i++) {
         printf("%d", current[i]); // 逐个打印排列中的数字
     }
     printf("\n");                 // 换行分隔不同排列
 }
 
 void generate(int pos) {          // 递归生成全排列的核心函数
-    if (pos == n) {               // pos: 当前正在填充的位置（从0开始）
+    if (pos == n + 1) {           // pos: 当前正在填充的位置（从 1 开始）
         print_perm();             // 输出当前完整的排列
         return;
     }
@@ -28,7 +28,7 @@ void generate(int pos) {          // 递归生成全排列的核心函数
 }
 
 int main() {
-    scanf("%d", &n);    // 读取输入的n值
-    generate(0);        // 从第 0 个位置开始生成排列
+    scanf("%d", &n);    // 读取输入的 n 值
+    generate(1);        // 从第 1 个位置开始生成排列
     return 0;
 }
