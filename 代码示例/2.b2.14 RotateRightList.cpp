@@ -3,9 +3,9 @@
 
 typedef int ElementType;
 
-typedef struct LNode {  // »ìºÏ¶¨Òåµ¥Á´±íµÄ½áµãÀàĞÍ
-    ElementType data;   // Êı¾İÓò
-    struct LNode *next; // Ö¸ÕëÓò
+typedef struct LNode {  // æ··åˆå®šä¹‰å•é“¾è¡¨çš„ç»“ç‚¹ç±»å‹
+    ElementType data;   // æ•°æ®åŸŸ
+    struct LNode *next; // æŒ‡é’ˆåŸŸ
 } LNode, *LinkList; 
 
 bool InitList(LinkList &L);
@@ -48,37 +48,37 @@ int main()
 	return 0;
 }
 
-bool InitList(LinkList &L)       // ²»´øÍ·½áµãµÄµ¥Á´±íµÄ³õÊ¼»¯
+bool InitList(LinkList &L)       // ä¸å¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨çš„åˆå§‹åŒ–
 {
-    L = NULL;                    // Í·Ö¸ÕëÎª¿Õ£¬¿Õ±í£¬ÔİÊ±»¹Ã»ÓĞÈÎºÎ½áµã
+    L = NULL;                    // å¤´æŒ‡é’ˆä¸ºç©ºï¼Œç©ºè¡¨ï¼Œæš‚æ—¶è¿˜æ²¡æœ‰ä»»ä½•ç»“ç‚¹
     return true;
 }
 
-/* ²»´øÍ·½áµãµÄÁ´±í²åÈë */
+/* ä¸å¸¦å¤´ç»“ç‚¹çš„é“¾è¡¨æ’å…¥ */
 bool ListInsert(LinkList &L, int i, ElementType e)
 {
-    if (i < 1)                         // i ÖµºÏ·¨ĞÔ¼ì²é
+    if (i < 1)                         // i å€¼åˆæ³•æ€§æ£€æŸ¥
         return false;
-    if (i == 1) {                      // ´¦Àí²åÈëµ½Ê×²¿(i = 1)µÄÇé¿ö
+    if (i == 1) {                      // å¤„ç†æ’å…¥åˆ°é¦–éƒ¨(i = 1)çš„æƒ…å†µ
         LNode *s = (LNode *)malloc(sizeof(LNode));
         s->data = e;
         s->next = L;
-        L = s;                        // Í·Ö¸ÕëÖ¸ÏòĞÂµÄ½áµã
+        L = s;                        // å¤´æŒ‡é’ˆæŒ‡å‘æ–°çš„ç»“ç‚¹
         return true;
     }
     
-    LNode *p = L;                    // Ö¸Õë p Ö¸Ïòµ±Ç°É¨Ãèµ½µÄ½áµã
-    int j = 1;                       // ¼ÆÊıÆ÷´Ó 1 ¿ªÊ¼
-    while (p != NULL && j < i - 1) { // Ñ­»·ÕÒµ½µÚ i-1 ¸ö½áµã
+    LNode *p = L;                    // æŒ‡é’ˆ p æŒ‡å‘å½“å‰æ‰«æåˆ°çš„ç»“ç‚¹
+    int j = 1;                       // è®¡æ•°å™¨ä» 1 å¼€å§‹
+    while (p != NULL && j < i - 1) { // å¾ªç¯æ‰¾åˆ°ç¬¬ i-1 ä¸ªç»“ç‚¹
         p = p->next;
         j++;
     }
-    if (p == NULL)                     // i Öµ²»ºÏ·¨
+    if (p == NULL)                     // i å€¼ä¸åˆæ³•
         return false;
     LNode *s = (LNode *)malloc(sizeof(LNode));
     s->data = e; 
-    s->next = p->next;                 // ĞÂ½áµãÏÈ½ÓÉÏºó¼Ì½áµã
-    p->next = s;                       // Ç°Çı½áµã½ÓÉÏĞÂ½áµã£¨Í¬Ê±¶Ï¿ªÔ­ºó¼Ì½áµãÁ¬½Ó£©
+    s->next = p->next;                 // æ–°ç»“ç‚¹å…ˆæ¥ä¸Šåç»§ç»“ç‚¹
+    p->next = s;                       // å‰é©±ç»“ç‚¹æ¥ä¸Šæ–°ç»“ç‚¹ï¼ˆåŒæ—¶æ–­å¼€åŸåç»§ç»“ç‚¹è¿æ¥ï¼‰
     return true;
 }
 

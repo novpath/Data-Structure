@@ -6,8 +6,8 @@ void ReverseArr(int A[], int left, int right, int n)
     if (left >= right || right >= n)
         return;
     for (int i = left; i <= (left + right) / 2; i++) {
-        temp = A[i];                                  // ¶Ô³Æ½»»»Á½¶Ë
-        A[i] = A[right + left - i];                   // ÓÒ¶ËµÚÒ»¸ö½»»»ÔªËØÊÇA[right + left - i]
+        temp = A[i];                                  // å¯¹ç§°äº¤æ¢ä¸¤ç«¯
+        A[i] = A[right + left - i];                   // å³ç«¯ç¬¬ä¸€ä¸ªäº¤æ¢å…ƒç´ æ˜¯A[right + left - i]
         A[right + left - i] = temp;
     }
 }

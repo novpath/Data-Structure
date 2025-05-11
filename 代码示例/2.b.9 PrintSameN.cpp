@@ -1,20 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXSIZE 50    //±í×î´ó³¤¶ÈµÄ¶¨Òå
+#define MAXSIZE 50    //è¡¨æœ€å¤§é•¿åº¦çš„å®šä¹‰
 
 typedef int ElementType;
 
 void PrintSameN(ElementType A[], ElementType B[], ElementType C[], int n)
 {
-    int i = 0, j = 0, k = 0;                     // ³õÊ¼»¯Èý¸ö¹¤×÷Ö¸Õë
-    while (i < n && j < n && k < n) {            // ÏàÍ¬ÔòÊä³ö£¬²¢¼¯ÌåºóÒÆ
+    int i = 0, j = 0, k = 0;                     // åˆå§‹åŒ–ä¸‰ä¸ªå·¥ä½œæŒ‡é’ˆ
+    while (i < n && j < n && k < n) {            // ç›¸åŒåˆ™è¾“å‡ºï¼Œå¹¶é›†ä½“åŽç§»
         if (A[i] == B[j] && B[j] == C[k]) {
             printf("%d\n", A[i]);
             i++; j++; k++;
         } else {
-            if (A[i] < B[j] || A[i] < C[k]) i++; // A[i]²»ÊÇ×î´ó¾ÍÈÃ i++
-            if (B[j] < A[i] || B[j] < C[k]) j++; // B[j]²»ÊÇ×î´ó¾ÍÈÃ j++
-            if (C[k] < A[i] || C[k] < B[j]) k++; // C[k]²»ÊÇ×î´ó¾ÍÈÃ k++
+            if (A[i] < B[j] || A[i] < C[k]) i++; // A[i]ä¸æ˜¯æœ€å¤§å°±è®© i++
+            if (B[j] < A[i] || B[j] < C[k]) j++; // B[j]ä¸æ˜¯æœ€å¤§å°±è®© j++
+            if (C[k] < A[i] || C[k] < B[j]) k++; // C[k]ä¸æ˜¯æœ€å¤§å°±è®© k++
         }
     }
 }

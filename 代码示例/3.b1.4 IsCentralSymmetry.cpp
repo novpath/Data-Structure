@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MaxSize 50           // ¶¨ÒåÕ»ÖĞÔªËØµÄ×î´ó¸öÊı
+#define MaxSize 50           // å®šä¹‰æ ˆä¸­å…ƒç´ çš„æœ€å¤§ä¸ªæ•°
 
 typedef char ElementType;
 
 typedef struct {
-    ElementType data[MaxSize];// ¾²Ì¬Êı×é´æ·ÅÕ»ÖĞÔªËØ
-    int top;                  // Õ»¶¥Ö¸Õë
+    ElementType data[MaxSize];// é™æ€æ•°ç»„å­˜æ”¾æ ˆä¸­å…ƒç´ 
+    int top;                  // æ ˆé¡¶æŒ‡é’ˆ
 } SqStack;
 
-typedef struct LNode {  // »ìºÏ¶¨Òåµ¥Á´±íµÄ½áµãÀàĞÍ
-    ElementType data;   // Êı¾İÓò
-    struct LNode *next; // Ö¸ÕëÓò
+typedef struct LNode {  // æ··åˆå®šä¹‰å•é“¾è¡¨çš„ç»“ç‚¹ç±»å‹
+    ElementType data;   // æ•°æ®åŸŸ
+    struct LNode *next; // æŒ‡é’ˆåŸŸ
 } LNode, *LinkList; 
 
 bool InitList(LinkList &L);
@@ -82,27 +82,27 @@ int main()
     return 0;
 }
 
-/* ²»´øÍ·½áµãµÄµ¥Á´±íµÄ³õÊ¼»¯ */
-bool InitList(LinkList &L)       // ²»´øÍ·½áµãµÄµ¥Á´±íµÄ³õÊ¼»¯
+/* ä¸å¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨çš„åˆå§‹åŒ– */
+bool InitList(LinkList &L)       // ä¸å¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨çš„åˆå§‹åŒ–
 {
-    L = NULL;                    // Í·Ö¸ÕëÎª¿Õ£¬¿Õ±í£¬ÔİÊ±»¹Ã»ÓĞÈÎºÎ½áµã
+    L = NULL;                    // å¤´æŒ‡é’ˆä¸ºç©ºï¼Œç©ºè¡¨ï¼Œæš‚æ—¶è¿˜æ²¡æœ‰ä»»ä½•ç»“ç‚¹
     return true;
 }
 
-/* ²»´øÍ·½áµãµÄÎ²²å·¨½¨Á¢µ¥Á´±í */
-LinkList ListTailInsert(LinkList &L)        // Ë³Ğò½¨Á¢µ¥Á´±í
+/* ä¸å¸¦å¤´ç»“ç‚¹çš„å°¾æ’æ³•å»ºç«‹å•é“¾è¡¨ */
+LinkList ListTailInsert(LinkList &L)        // é¡ºåºå»ºç«‹å•é“¾è¡¨
 {
-    int x;                                  // ½áµãÔªËØÀàĞÍÎªÕûĞÎ
-    L = NULL;                               // ³õÊ¼»¯Í·Ö¸Õë
-    LNode *s, *r = NULL;                    // r Îª±íÎ²Ö¸Õë
-    while (scanf("%c", &x) && x != '\n') {  // ÊäÈëÒ»¸ö²»¿ÉÄÜÈ¡µ½µÄÊı±íÊ¾½áÊø
-        s = (LinkList)malloc(sizeof(LNode));// ´´½¨ĞÂ½áµã
+    int x;                                  // ç»“ç‚¹å…ƒç´ ç±»å‹ä¸ºæ•´å½¢
+    L = NULL;                               // åˆå§‹åŒ–å¤´æŒ‡é’ˆ
+    LNode *s, *r = NULL;                    // r ä¸ºè¡¨å°¾æŒ‡é’ˆ
+    while (scanf("%c", &x) && x != '\n') {  // è¾“å…¥ä¸€ä¸ªä¸å¯èƒ½å–åˆ°çš„æ•°è¡¨ç¤ºç»“æŸ
+        s = (LinkList)malloc(sizeof(LNode));// åˆ›å»ºæ–°ç»“ç‚¹
         s->data = x;
         s->next = NULL;
-        if (L == NULL) {                    // Á´±íÎª¿ÕÊ±£¬ĞÂ½áµã×÷ÎªµÚÒ»¸ö½áµã
+        if (L == NULL) {                    // é“¾è¡¨ä¸ºç©ºæ—¶ï¼Œæ–°ç»“ç‚¹ä½œä¸ºç¬¬ä¸€ä¸ªç»“ç‚¹
             L = s;
             r = L;
-        } else {                            // Á´±í·Ç¿ÕÊ±£¬²åÈëÎ²²¿
+        } else {                            // é“¾è¡¨éç©ºæ—¶ï¼Œæ’å…¥å°¾éƒ¨
             r->next = s;
             r = s;
         }
@@ -110,35 +110,35 @@ LinkList ListTailInsert(LinkList &L)        // Ë³Ğò½¨Á¢µ¥Á´±í
     return L;
 }
 
-/* ²»´øÍ·½áµãµÄµ¥Á´±íÇó±í³¤ */
+/* ä¸å¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨æ±‚è¡¨é•¿ */
 int Length (LinkList L)
 { 
-    int len = 0;        // ¼ÆÊı±äÁ¿£¬³õÊ¼Îª 0
+    int len = 0;        // è®¡æ•°å˜é‡ï¼Œåˆå§‹ä¸º 0
     LNode *p = L;
     while (p != NULL) { 
-        p = p->next;   // ²»ÄÜĞ´³É p++£¬ p++ÊÇÖ¸ÏòÏÂÒ»¸öÖ¸ÕëÀàĞÍÎ»ÖÃ£¬¶ø next ÊÇÖ¸ÏòÏÂÒ»½á¹¹
-        len++;         // Ã¿·ÃÎÊÒ»¸ö½áµã£¬¼ÆÊı¼Ó 1
+        p = p->next;   // ä¸èƒ½å†™æˆ p++ï¼Œ p++æ˜¯æŒ‡å‘ä¸‹ä¸€ä¸ªæŒ‡é’ˆç±»å‹ä½ç½®ï¼Œè€Œ next æ˜¯æŒ‡å‘ä¸‹ä¸€ç»“æ„
+        len++;         // æ¯è®¿é—®ä¸€ä¸ªç»“ç‚¹ï¼Œè®¡æ•°åŠ  1
     } 
     return len;
 }
 
 void InitStack(SqStack &S)
 {
-    S.top = -1;            // ³õÊ¼»¯Õ»¶¥Ö¸Õë
+    S.top = -1;            // åˆå§‹åŒ–æ ˆé¡¶æŒ‡é’ˆ
 }
 
 bool Push(SqStack &S, ElementType x)
 {
-    if (S.top == MaxSize - 1)     // Õ»Âú£¬±¨´í
+    if (S.top == MaxSize - 1)     // æ ˆæ»¡ï¼ŒæŠ¥é”™
         return false;
-    S.data[++S.top] = x;          // Ö¸ÕëÏÈ¼Ó 1£¬ÔÙÈëÕ»
+    S.data[++S.top] = x;          // æŒ‡é’ˆå…ˆåŠ  1ï¼Œå†å…¥æ ˆ
     return true;
 }
 
 bool Pop(SqStack &S, ElementType &x)
 {
-    if (S.top == -1)        // Õ»¿Õ£¬±¨´í
+    if (S.top == -1)        // æ ˆç©ºï¼ŒæŠ¥é”™
         return false;
-    x = S.data[S.top--];    // ÏÈ³öÕ»£¬Ö¸ÕëÔÙ¼õ 1
+    x = S.data[S.top--];    // å…ˆå‡ºæ ˆï¼ŒæŒ‡é’ˆå†å‡ 1
     return true;
 }

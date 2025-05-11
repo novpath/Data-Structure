@@ -3,9 +3,9 @@
 
 typedef int ElementType;
 
-typedef struct LNode {  // »ìºÏ¶¨Òåµ¥Á´±íµÄ½áµãÀàĞÍ
-    ElementType data;   // Êı¾İÓò
-    struct LNode *next; // Ö¸ÕëÓò
+typedef struct LNode {  // æ··åˆå®šä¹‰å•é“¾è¡¨çš„ç»“ç‚¹ç±»å‹
+    ElementType data;   // æ•°æ®åŸŸ
+    struct LNode *next; // æŒ‡é’ˆåŸŸ
 } LNode, *LinkList; 
 
 bool InitList(LinkList &L);
@@ -14,23 +14,23 @@ void PrintList(LinkList &L);
 
 LinkList CreateListByCommonValue(LinkList LA, LinkList LB) {
     LNode *p = LA->next, *q = LB->next;
-    LNode *LC = (LNode *)malloc(sizeof(LNode));         // ½¨Á¢Á´±í C
-    LNode *r = LC;                                      // r Ö¸ÏòÁ´±í C µÄÎ²½áµã
-    while (p != NULL && q != NULL) {                    // É¨Ãèµ½ÈÎÒ»Á´±í½áÊø
+    LNode *LC = (LNode *)malloc(sizeof(LNode));         // å»ºç«‹é“¾è¡¨ C
+    LNode *r = LC;                                      // r æŒ‡å‘é“¾è¡¨ C çš„å°¾ç»“ç‚¹
+    while (p != NULL && q != NULL) {                    // æ‰«æåˆ°ä»»ä¸€é“¾è¡¨ç»“æŸ
         if (p->data > q->data) {
-            q = q->next;                                // ËùÖ¸Á´±íÔªËØĞ¡µÄÖ¸ÕëºóÒÆ
+            q = q->next;                                // æ‰€æŒ‡é“¾è¡¨å…ƒç´ å°çš„æŒ‡é’ˆåç§»
         } else if (p->data < q->data) {
             p = p->next;
         } else {
-            LNode * s = (LNode *)malloc(sizeof(LNode)); // ĞÂ½¨½áµã
+            LNode * s = (LNode *)malloc(sizeof(LNode)); // æ–°å»ºç»“ç‚¹
             s->data = p->data;
-            r->next = s;                                // *s ½Óµ½ LC Î²²¿
+            r->next = s;                                // *s æ¥åˆ° LC å°¾éƒ¨
             r = s;
-            p = p->next;                                // ¼ÌĞøÏòºóÉ¨Ãè
+            p = p->next;                                // ç»§ç»­å‘åæ‰«æ
             q = q->next;
         }
     }
-    r->next = NULL;                                     // Á´±í C µÄÎ²½áµãÖ¸ÕëÖÃ¿Õ
+    r->next = NULL;                                     // é“¾è¡¨ C çš„å°¾ç»“ç‚¹æŒ‡é’ˆç½®ç©º
     return LC;
 }
 
@@ -54,31 +54,31 @@ int main()
 	return 0;
 }
 
-bool InitList(LinkList &L)              // ´øÍ·½áµãµÄµ¥Á´±íµÄ³õÊ¼»¯
+bool InitList(LinkList &L)              // å¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨çš„åˆå§‹åŒ–
 {
-    L = (LNode *)malloc(sizeof(LNode)); // ´´½¨Í·½áµã
-    if (L == NULL)                      // ÄÚ´æ²»×ã£¬·ÖÅäÊ§°Ü
+    L = (LNode *)malloc(sizeof(LNode)); // åˆ›å»ºå¤´ç»“ç‚¹
+    if (L == NULL)                      // å†…å­˜ä¸è¶³ï¼Œåˆ†é…å¤±è´¥
         return false;
-    L->next = NULL;                     // Í·½áµãµÄÖ¸ÕëÓòÎª¿Õ
+    L->next = NULL;                     // å¤´ç»“ç‚¹çš„æŒ‡é’ˆåŸŸä¸ºç©º
     return true;
 }
 
 bool ListInsert(LinkList &L, int i, ElementType e)
 {
-    if (i < 1)                       // i ÖµºÏ·¨ĞÔ¼ì²é
+    if (i < 1)                       // i å€¼åˆæ³•æ€§æ£€æŸ¥
         return false;
-    LNode *p = L;                    // Ö¸Õë p Ö¸Ïòµ±Ç°É¨Ãèµ½µÄ½áµã
-    int j = 0;                       // ¼ÇÂ¼µ±Ç°½áµãµÄÎ»Ğò£¬Í·½áµãÊÇµÚ 0 ¸ö½áµã
-    while (p != NULL && j < i - 1) { // Ñ­»·ÕÒµ½µÚ i-1 ¸ö½áµã
+    LNode *p = L;                    // æŒ‡é’ˆ p æŒ‡å‘å½“å‰æ‰«æåˆ°çš„ç»“ç‚¹
+    int j = 0;                       // è®°å½•å½“å‰ç»“ç‚¹çš„ä½åºï¼Œå¤´ç»“ç‚¹æ˜¯ç¬¬ 0 ä¸ªç»“ç‚¹
+    while (p != NULL && j < i - 1) { // å¾ªç¯æ‰¾åˆ°ç¬¬ i-1 ä¸ªç»“ç‚¹
         p = p->next;
         j++;
     }
-    if (p == NULL)                   // i Öµ²»ºÏ·¨
+    if (p == NULL)                   // i å€¼ä¸åˆæ³•
         return false;
     LNode *s = (LNode *)malloc(sizeof(LNode));
     s->data = e; 
-    s->next = p->next;               // ĞÂ½áµãÏÈ½ÓÉÏºó¼Ì½áµã
-    p->next = s;                     // Ç°Çı½áµã½ÓÉÏĞÂ½áµã£¨Í¬Ê±¶Ï¿ªÔ­ºó¼Ì½áµãÁ¬½Ó£©
+    s->next = p->next;               // æ–°ç»“ç‚¹å…ˆæ¥ä¸Šåç»§ç»“ç‚¹
+    p->next = s;                     // å‰é©±ç»“ç‚¹æ¥ä¸Šæ–°ç»“ç‚¹ï¼ˆåŒæ—¶æ–­å¼€åŸåç»§ç»“ç‚¹è¿æ¥ï¼‰
     return true;
 }
 

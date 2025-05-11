@@ -1,26 +1,26 @@
 #include <stdio.h>
-#define MaxSize 50              // ¶¨Òå¶ÓÁĞÖĞÔªËØµÄ×î´ó¸öÊı
+#define MaxSize 50              // å®šä¹‰é˜Ÿåˆ—ä¸­å…ƒç´ çš„æœ€å¤§ä¸ªæ•°
 
 typedef int ElementType;
 
 typedef struct {
-    ElementType data[MaxSize];  // ÓÃ¾²Ì¬Êı×é´æ·Å¶ÓÁĞÔªËØ
-    int front, rear;            // ¶ÓÊ×Ö¸ÕëºÍ¶ÓÎ²Ö¸Õë
+    ElementType data[MaxSize];  // ç”¨é™æ€æ•°ç»„å­˜æ”¾é˜Ÿåˆ—å…ƒç´ 
+    int front, rear;            // é˜Ÿé¦–æŒ‡é’ˆå’Œé˜Ÿå°¾æŒ‡é’ˆ
 } SqQueue;
 
 typedef struct {
-    ElementType data[MaxSize]; // ¾²Ì¬Êı×é´æ·ÅÕ»ÖĞÔªËØ
-    int top;                   // Õ»¶¥Ö¸Õë
+    ElementType data[MaxSize]; // é™æ€æ•°ç»„å­˜æ”¾æ ˆä¸­å…ƒç´ 
+    int top;                   // æ ˆé¡¶æŒ‡é’ˆ
 } SqStack;
 
 void InitQueue(SqQueue &Q)
 {
-    Q.rear = Q.front = 0;    // ³õÊ¼»¯¶ÓÊ×¡¢¶ÓÎ²Ö¸Õë
+    Q.rear = Q.front = 0;    // åˆå§‹åŒ–é˜Ÿé¦–ã€é˜Ÿå°¾æŒ‡é’ˆ
 }
 
 bool QueueEmpty(SqQueue Q) 
 {
-    if (Q.rear == Q.front)    // ¶Ó¿ÕÌõ¼ş
+    if (Q.rear == Q.front)    // é˜Ÿç©ºæ¡ä»¶
         return true;
     else
         return false;
@@ -28,61 +28,61 @@ bool QueueEmpty(SqQueue Q)
 
 bool EnQueue(SqQueue &Q, ElementType x) 
 {
-    if ((Q.rear + 1) % MaxSize == Q.front)   // ¶ÓÂúÔò±¨´í
+    if ((Q.rear + 1) % MaxSize == Q.front)   // é˜Ÿæ»¡åˆ™æŠ¥é”™
         return false;
-    Q.data[Q.rear] = x;                      // ½« x ²åÈë¶ÓÎ²
-    Q.rear = (Q.rear + 1) % MaxSize;         // ¶ÓÎ²Ö¸Õë¼Ó 1 È¡Ä£
+    Q.data[Q.rear] = x;                      // å°† x æ’å…¥é˜Ÿå°¾
+    Q.rear = (Q.rear + 1) % MaxSize;         // é˜Ÿå°¾æŒ‡é’ˆåŠ  1 å–æ¨¡
     return true;
 }
 
-bool DeQueue(SqQueue &Q, ElementType &x)   // Ö»ÄÜÈÃ¶ÓÍ·ÔªËØ³ö¶Ó
+bool DeQueue(SqQueue &Q, ElementType &x)   // åªèƒ½è®©é˜Ÿå¤´å…ƒç´ å‡ºé˜Ÿ
 {
-    if (Q.rear == Q.front)                 // ¶Ó¿ÕÔò±¨´í
+    if (Q.rear == Q.front)                 // é˜Ÿç©ºåˆ™æŠ¥é”™
         return false;
     x = Q.data[Q.front];
-    Q.front = (Q.front + 1) % MaxSize;     // ¶ÓÊ×Ö¸Õë¼Ó 1 È¡Ä£
+    Q.front = (Q.front + 1) % MaxSize;     // é˜Ÿé¦–æŒ‡é’ˆåŠ  1 å–æ¨¡
     return true;
 }
 
 void InitStack(SqStack &S)
 {
-    S.top = -1;            // ³õÊ¼»¯Õ»¶¥Ö¸Õë
+    S.top = -1;            // åˆå§‹åŒ–æ ˆé¡¶æŒ‡é’ˆ
 }
 
 bool StackEmpty(SqStack S)
 {
-    if (S.top == -1)       // Õ»¿Õ
+    if (S.top == -1)       // æ ˆç©º
         return true;
-    else                   // ²»¿Õ
+    else                   // ä¸ç©º
         return false;
 }
 
 bool Push(SqStack &S, ElementType x)
 {
-    if (S.top == MaxSize - 1)     // Õ»Âú£¬±¨´í
+    if (S.top == MaxSize - 1)     // æ ˆæ»¡ï¼ŒæŠ¥é”™
         return false;
-    S.data[++S.top] = x;          // Ö¸ÕëÏÈ¼Ó 1£¬ÔÙÈëÕ»
+    S.data[++S.top] = x;          // æŒ‡é’ˆå…ˆåŠ  1ï¼Œå†å…¥æ ˆ
     return true;
 }
 
 bool Pop(SqStack &S, ElementType &x)
 {
-    if (S.top == -1)        // Õ»¿Õ£¬±¨´í
+    if (S.top == -1)        // æ ˆç©ºï¼ŒæŠ¥é”™
         return false;
-    x = S.data[S.top--];    // ÏÈ³öÕ»£¬Ö¸ÕëÔÙ¼õ 1
+    x = S.data[S.top--];    // å…ˆå‡ºæ ˆï¼ŒæŒ‡é’ˆå†å‡ 1
     return true;
 }
 
 void ReverseQueue(SqQueue &Q, SqStack &S)
 {
     ElementType x;
-    while (!QueueEmpty(Q)) {  // ³ö¶ÓÖ±µ½¶ÓÁĞ¿Õ 
-        DeQueue(Q, x);	      // ³ö¶Ó 
-        Push(S, x);			  // ÈëÕ» 
+    while (!QueueEmpty(Q)) {  // å‡ºé˜Ÿç›´åˆ°é˜Ÿåˆ—ç©º 
+        DeQueue(Q, x);	      // å‡ºé˜Ÿ 
+        Push(S, x);			  // å…¥æ ˆ 
     }
-    while (!StackEmpty(S)) {  // ³öÕ»Ö±µ½Õ»¿Õ 
-        Pop(S, x);			  // ³öÕ» 
-        EnQueue(Q, x);		  // Èë¶Ó 
+    while (!StackEmpty(S)) {  // å‡ºæ ˆç›´åˆ°æ ˆç©º 
+        Pop(S, x);			  // å‡ºæ ˆ 
+        EnQueue(Q, x);		  // å…¥é˜Ÿ 
     }
 }
 

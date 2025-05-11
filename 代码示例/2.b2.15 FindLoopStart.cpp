@@ -1,5 +1,5 @@
 /**
- * leetcode LCR 022 Ô­Ìâ-Accepted 
+ * leetcode LCR 022 - Accepted
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -7,18 +7,18 @@
  * };
  */
 struct ListNode *detectCycle(struct ListNode *head) {
-    struct ListNode *fast = head, *slow = head;             // ÉèÖÃ¿ìÂıÁ½¸öÖ¸Õë
+    struct ListNode *fast = head, *slow = head;             // è®¾ç½®å¿«æ…¢ä¸¤ä¸ªæŒ‡é’ˆ
     while (fast != NULL && fast->next != NULL) {
-        slow = slow->next;                        // Ã¿´Î×ßÒ»²½
-        fast = fast->next->next;                  // Ã¿´Î×ßÁ½²½
-        if (slow == fast) break;                  // ÏàÓö
+        slow = slow->next;                        // æ¯æ¬¡èµ°ä¸€æ­¥
+        fast = fast->next->next;                  // æ¯æ¬¡èµ°ä¸¤æ­¥
+        if (slow == fast) break;                  // ç›¸é‡
     }
     if (fast == NULL || fast->next == NULL)
-        return NULL;                              // Ã»ÓĞ»·, ·µ»Ø NULL
-    struct ListNode *p1=head, *p2=slow;                     // ·Ö±ğÖ¸Ïò¿ªÊ¼µã¡¢ÏàÓöµã
+        return NULL;                              // æ²¡æœ‰ç¯, è¿”å› NULL
+    struct ListNode *p1=head, *p2=slow;                     // åˆ†åˆ«æŒ‡å‘å¼€å§‹ç‚¹ã€ç›¸é‡ç‚¹
     while (p1 != p2) {
         p1 = p1->next;
         p2 = p2->next;
     }
-    return p1;                                   // ·µ»ØÈë¿Úµã
+    return p1;                                   // è¿”å›å…¥å£ç‚¹
 }

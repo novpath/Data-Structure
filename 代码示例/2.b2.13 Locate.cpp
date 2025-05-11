@@ -3,10 +3,10 @@
 
 typedef int ElementType;
 
-typedef struct DNode {          // »ìºÏ¶¨ÒåË«Á´±í½áµãÀàĞÍ
-    ElementType data;           // Êı¾İÓò
+typedef struct DNode {          // æ··åˆå®šä¹‰åŒé“¾è¡¨ç»“ç‚¹ç±»å‹
+    ElementType data;           // æ•°æ®åŸŸ
     int freq;
-    struct DNode *prior, *next;   // Ç°ÇıºÍºó¼ÌÖ¸Õë
+    struct DNode *prior, *next;   // å‰é©±å’Œåç»§æŒ‡é’ˆ
 } DNode, *DLinkList;
 
 bool InitDLinkList(DLinkList &L);
@@ -61,43 +61,43 @@ int main()
 
 bool InitDLinkList(DLinkList &L)
 {
-    L = (DNode *)malloc(sizeof(DNode));  // ·ÖÅäÒ»¸öÍ·½áµã
-    if (L == NULL)                       // ÄÚ´æ²»×ã£¬·ÖÅäÊ§°Ü
+    L = (DNode *)malloc(sizeof(DNode));  // åˆ†é…ä¸€ä¸ªå¤´ç»“ç‚¹
+    if (L == NULL)                       // å†…å­˜ä¸è¶³ï¼Œåˆ†é…å¤±è´¥
         return false;
-    L->prior = NULL;                     // Í·½áµãµÄ prior ÓÀÔ¶Ö¸Ïò NULL
-    L->next = NULL;                      // Í·½áµãÖ®ºóÔİÊ±»¹Ã»ÓĞ½Úµã
+    L->prior = NULL;                     // å¤´ç»“ç‚¹çš„ prior æ°¸è¿œæŒ‡å‘ NULL
+    L->next = NULL;                      // å¤´ç»“ç‚¹ä¹‹åæš‚æ—¶è¿˜æ²¡æœ‰èŠ‚ç‚¹
     return true;
 }
 
-/* ²»´øÍ·½áµãµÄË«Á´±í²åÈë */
+/* ä¸å¸¦å¤´ç»“ç‚¹çš„åŒé“¾è¡¨æ’å…¥ */
 bool DListInsert(DLinkList &L, int i, ElementType e)
 {
-    if (i < 1)                        // ¼ì²éÎ»ÖÃºÏ·¨ĞÔ
+    if (i < 1)                        // æ£€æŸ¥ä½ç½®åˆæ³•æ€§
         return false;
     
-    DNode *p = L;                     // pÖ¸ÏòÍ·½áµã
-    int j = 0;                        // µ±Ç°pÖ¸ÏòµÄÊÇµÚ0¸ö½áµã£¨Í·½áµã£©
+    DNode *p = L;                     // pæŒ‡å‘å¤´ç»“ç‚¹
+    int j = 0;                        // å½“å‰pæŒ‡å‘çš„æ˜¯ç¬¬0ä¸ªç»“ç‚¹ï¼ˆå¤´ç»“ç‚¹ï¼‰
     
-    while (p != NULL && j < i - 1) {  // Ñ°ÕÒµÚi-1¸ö½áµã
+    while (p != NULL && j < i - 1) {  // å¯»æ‰¾ç¬¬i-1ä¸ªç»“ç‚¹
         p = p->next;
         j++;
     }
-    if (p == NULL)                    // i³¬¹ıÁ´±í³¤¶È+1»òÎŞĞ§Î»ÖÃ
+    if (p == NULL)                    // iè¶…è¿‡é“¾è¡¨é•¿åº¦+1æˆ–æ— æ•ˆä½ç½®
         return false;
     
     DNode *s = (DNode *)malloc(sizeof(DNode));
-    if (s == NULL)                   // ÄÚ´æ·ÖÅäÊ§°Ü´¦Àí
+    if (s == NULL)                   // å†…å­˜åˆ†é…å¤±è´¥å¤„ç†
         return false;
     
     s->data = e;
-    s->next = p->next;               // ĞÂ½áµãºó¼ÌÖ¸ÏòÔ­µÚi¸ö½áµã
-    s->prior = p;                    // ĞÂ½áµãÇ°ÇıÖ¸ÏòµÚi-1¸ö½áµã
+    s->next = p->next;               // æ–°ç»“ç‚¹åç»§æŒ‡å‘åŸç¬¬iä¸ªç»“ç‚¹
+    s->prior = p;                    // æ–°ç»“ç‚¹å‰é©±æŒ‡å‘ç¬¬i-1ä¸ªç»“ç‚¹
     
-    if (p->next != NULL) {           // Èç¹ûÔ­µÚi¸ö½áµã´æÔÚ
-        p->next->prior = s;          // Ô­µÚi¸ö½áµãµÄÇ°Çı¸ÄÎªĞÂ½áµã
+    if (p->next != NULL) {           // å¦‚æœåŸç¬¬iä¸ªç»“ç‚¹å­˜åœ¨
+        p->next->prior = s;          // åŸç¬¬iä¸ªç»“ç‚¹çš„å‰é©±æ”¹ä¸ºæ–°ç»“ç‚¹
     }
     
-    p->next = s; // µÚi-1¸ö½áµãµÄºó¼Ì¸ÄÎªĞÂ½áµã
+    p->next = s; // ç¬¬i-1ä¸ªç»“ç‚¹çš„åç»§æ”¹ä¸ºæ–°ç»“ç‚¹
     return true;
 }
 

@@ -64,16 +64,16 @@ void swap(int *a, int *b)
 }
 
 void dfs(int start, int len, int a[]) {
-    if (start == len - 1) {               // Íê³ÉÒ»¸öÅÅÁĞ
+    if (start == len - 1) {               // å®Œæˆä¸€ä¸ªæ’åˆ—
     	if(print(a[0], a[1], a[2], a[3]))
     		exit(0);
         return ;
     }
     
     for (int i = start; i < len; i++) {
-        swap(&a[start], &a[i]);           // ½»»»ÔªËØ
-        dfs(start + 1, len, a);           // µİ¹éÏÂÒ»²ã
-        swap(&a[start], &a[i]);           // »ØËİ»Ö¸´
+        swap(&a[start], &a[i]);           // äº¤æ¢å…ƒç´ 
+        dfs(start + 1, len, a);           // é€’å½’ä¸‹ä¸€å±‚
+        swap(&a[start], &a[i]);           // å›æº¯æ¢å¤
     }
 }
 

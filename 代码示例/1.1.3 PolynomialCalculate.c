@@ -3,8 +3,8 @@
 #include <math.h>
 clock_t start, stop; 
 double duration;
-#define MAXN 10   	/* 多项式最大项数，即多项式阶数+1 */
-#define MAXK 1e7  	/* 函数运行次数 */
+#define MAXN 10   	/* 澶氶」寮忔渶澶ч」鏁帮紝鍗冲椤瑰紡闃舵暟+1 */
+#define MAXK 1e7  	/* 鍑芥暟杩愯娆℃暟 */
 double f1( int n, double a[], double x );
 double f2( int n, double a[], double x );
 void run(double(*f)(int, double *, double), double a[], int case_n)
@@ -22,7 +22,7 @@ void run(double(*f)(int, double *, double), double a[], int case_n)
 int main ()
 { 
     int i;
-	double a[MAXN]; /* 存储多项式的系数 */
+	double a[MAXN]; /* 瀛樺偍澶氶」寮忕殑绯绘暟 */
 	for ( i=0; i<MAXN; i++ ) a[i] = (double)i; 
 	
 	run(f1, a, 1);

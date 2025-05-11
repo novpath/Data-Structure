@@ -7,10 +7,10 @@ typedef struct {
     int top;
 } SqStack;
 
-void InitStack(SqStack &S);    // ³õÊ¼»¯Õ»
-bool StackEmpty(SqStack S);    // ÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
-bool Push(SqStack &S, char x); // ĞÂÔªËØÈëÕ»
-bool Pop(SqStack &S, char &x); // Õ»¶¥ÔªËØ³öÕ»£¬ÓÃ x ·µ»Ø
+void InitStack(SqStack &S);    // åˆå§‹åŒ–æ ˆ
+bool StackEmpty(SqStack S);    // åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
+bool Push(SqStack &S, char x); // æ–°å…ƒç´ å…¥æ ˆ
+bool Pop(SqStack &S, char &x); // æ ˆé¡¶å…ƒç´ å‡ºæ ˆï¼Œç”¨ x è¿”å›
 
 bool BracketCheck(char str[], int length)
 {
@@ -18,12 +18,12 @@ bool BracketCheck(char str[], int length)
     InitStack(S);
     for (int i = 0; i < length; i++) {
         if (str[i] == '(' || str[i] == '[' || str[i] == '{') {
-            Push(S, str[i]);    // É¨Ãèµ½×óÀ¨ºÅ£¬ÈëÕ»
+            Push(S, str[i]);    // æ‰«æåˆ°å·¦æ‹¬å·ï¼Œå…¥æ ˆ
         } else {
-            if (StackEmpty(S))  // É¨Ãèµ½ÓÒÀ¨ºÅ£¬ÇÒµ±Ç°Õ»¿Õ
-                return false;   // Æ¥ÅäÊ§°Ü
+            if (StackEmpty(S))  // æ‰«æåˆ°å³æ‹¬å·ï¼Œä¸”å½“å‰æ ˆç©º
+                return false;   // åŒ¹é…å¤±è´¥
             char topElem;
-            Pop(S, topElem);    // Õ»¶¥ÔªËØ³öÕ»
+            Pop(S, topElem);    // æ ˆé¡¶å…ƒç´ å‡ºæ ˆ
             if (str[i] == ')' && topElem != '(')
                 return false;
             if (str[i] == ']' && topElem != '[')
@@ -32,7 +32,7 @@ bool BracketCheck(char str[], int length)
                 return false;
         }
     }
-    return StackEmpty(S);       // ¼ìË÷ÍêÈ«²¿À¨ºÅºó£¬Õ»¿ÕËµÃ÷Æ¥Åä³É¹¦
+    return StackEmpty(S);       // æ£€ç´¢å®Œå…¨éƒ¨æ‹¬å·åï¼Œæ ˆç©ºè¯´æ˜åŒ¹é…æˆåŠŸ
 }
 
 int main()
@@ -47,30 +47,30 @@ int main()
 
 void InitStack(SqStack &S)
 {
-    S.top = -1;            // ³õÊ¼»¯Õ»¶¥Ö¸Õë
+    S.top = -1;            // åˆå§‹åŒ–æ ˆé¡¶æŒ‡é’ˆ
 }
 
 bool StackEmpty(SqStack S)
 {
-    if (S.top == -1)       // Õ»¿Õ
+    if (S.top == -1)       // æ ˆç©º
         return true;
-    else                   // ²»¿Õ
+    else                   // ä¸ç©º
         return false;
 }
 
 bool Push(SqStack &S, ElementType x)
 {
-    if (S.top == MaxSize - 1)     // Õ»Âú£¬±¨´í
+    if (S.top == MaxSize - 1)     // æ ˆæ»¡ï¼ŒæŠ¥é”™
         return false;
-    S.data[++S.top] = x;          // Ö¸ÕëÏÈ¼Ó 1£¬ÔÙÈëÕ»
+    S.data[++S.top] = x;          // æŒ‡é’ˆå…ˆåŠ  1ï¼Œå†å…¥æ ˆ
     return true;
 }
 
 bool Pop(SqStack &S, ElementType &x)
 {
-    if (S.top == -1)        // Õ»¿Õ£¬±¨´í
+    if (S.top == -1)        // æ ˆç©ºï¼ŒæŠ¥é”™
         return false;
-    x = S.data[S.top--];    // ÏÈ³öÕ»£¬Ö¸ÕëÔÙ¼õ 1
+    x = S.data[S.top--];    // å…ˆå‡ºæ ˆï¼ŒæŒ‡é’ˆå†å‡ 1
     return true;
 }
 

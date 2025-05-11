@@ -1,5 +1,5 @@
 /**
- * AcWing 66 Ô­Ìâ - Accepted
+ * AcWing 66 - Accepted
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -9,11 +9,11 @@
 
 int Length (struct ListNode *L)
 { 
-    int len = 0;        // ¼ÆÊý±äÁ¿£¬³õÊ¼Îª 0
+    int len = 0;        // è®¡æ•°å˜é‡ï¼Œåˆå§‹ä¸º 0
     struct ListNode *p = L;
     while (p != NULL) { 
-        p = p->next;    // ²»ÄÜÐ´³É p++£¬ p++ÊÇÖ¸ÏòÏÂÒ»¸öÖ¸ÕëÀàÐÍÎ»ÖÃ£¬¶ø next ÊÇÖ¸ÏòÏÂÒ»½á¹¹
-        len++;          // Ã¿·ÃÎÊÒ»¸ö½áµã£¬¼ÆÊý¼Ó 1
+        p = p->next;    // ä¸èƒ½å†™æˆ p++ï¼Œ p++æ˜¯æŒ‡å‘ä¸‹ä¸€ä¸ªæŒ‡é’ˆç±»åž‹ä½ç½®ï¼Œè€Œ next æ˜¯æŒ‡å‘ä¸‹ä¸€ç»“æž„
+        len++;          // æ¯è®¿é—®ä¸€ä¸ªç»“ç‚¹ï¼Œè®¡æ•°åŠ  1
     } 
     return len;
 }

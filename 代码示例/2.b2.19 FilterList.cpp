@@ -1,5 +1,5 @@
 /**
- * AcWing 3756 Ô­Ìâ-Accepted 
+ * AcWing 3756 - Accepted
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -18,21 +18,21 @@ int Abs(int a)
 LNode* filterList(LNode* head)
 {
     int n = 10001;
-    LNode *p = head, *q;                            // ¹¤×÷Ö¸Õë£¬q Ö¸Ïò p Ç°Çı
-    int *s = (int *)malloc(sizeof(int) * (n + 1));  // ÉêÇë n+1 ¸öÎ»ÖÃµÄ¸¨Öú¿Õ¼ä
-    for(int i = 0; i < n + 1; i++)             // Êı×éÔªËØ³õÖµÖÃÎªÁã
+    LNode *p = head, *q;                            // å·¥ä½œæŒ‡é’ˆï¼Œq æŒ‡å‘ p å‰é©±
+    int *s = (int *)malloc(sizeof(int) * (n + 1));  // ç”³è¯· n+1 ä¸ªä½ç½®çš„è¾…åŠ©ç©ºé—´
+    for(int i = 0; i < n + 1; i++)             // æ•°ç»„å…ƒç´ åˆå€¼ç½®ä¸ºé›¶
         *(s + i) = 0;
     while (p != NULL) {
-        if (*(s + Abs(p->val)) == 0) {        // ÅĞ¶Ï¸Ã½áµãµÄ val ÊÇ·ñ³öÏÖ¹ı
-            *(s + Abs(p->val)) = 1;           // Ê×´Î³öÏÖ£¬Ôò½«¸ÃÎ»ÖÃµÄÊı×éÖÃÎª 1
-            q = p;                             // ¹¤×÷Ö¸ÕëºóÒÆ
+        if (*(s + Abs(p->val)) == 0) {        // åˆ¤æ–­è¯¥ç»“ç‚¹çš„ val æ˜¯å¦å‡ºç°è¿‡
+            *(s + Abs(p->val)) = 1;           // é¦–æ¬¡å‡ºç°ï¼Œåˆ™å°†è¯¥ä½ç½®çš„æ•°ç»„ç½®ä¸º 1
+            q = p;                             // å·¥ä½œæŒ‡é’ˆåç§»
             p = p->next;    
-        } else {                               // ÖØ¸´³öÏÖ
-            q->next = p->next;                 // É¾³ı½áµã p
+        } else {                               // é‡å¤å‡ºç°
+            q->next = p->next;                 // åˆ é™¤ç»“ç‚¹ p
             free(p);
-            p = q->next;                       // »Ö¸´Ö¸Õë£¬´¦ÀíÏÂÒ»¸ö½áµã
+            p = q->next;                       // æ¢å¤æŒ‡é’ˆï¼Œå¤„ç†ä¸‹ä¸€ä¸ªç»“ç‚¹
         }
     }
-    free(s);                                   // ÊÍ·ÅÉêÇëµÄÊı×é¿Õ¼ä
+    free(s);                                   // é‡Šæ”¾ç”³è¯·çš„æ•°ç»„ç©ºé—´
     return head;
 }

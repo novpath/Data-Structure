@@ -4,7 +4,7 @@
 #include <math.h>
 clock_t start, stop; 
 double duration;
-#define MAXN 40000 /* Êı¾İÁ¿ */
+#define MAXN 40000 /* æ•°æ®é‡ */
 void PrintN1 ( int N , FILE *fptr);
 void PrintN2 ( int N , FILE *fptr);
 void run(void(*f)(int, FILE *), int case_n, FILE *fptr)

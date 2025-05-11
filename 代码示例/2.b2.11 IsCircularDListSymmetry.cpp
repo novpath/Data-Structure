@@ -3,9 +3,9 @@
 
 typedef int ElementType;
 
-typedef struct DNode {            // ¶¨ÒåË«Á´±í½áµãÀàĞÍ
-    ElementType data;             // Êı¾İÓò
-    struct DNode *prior, *next;   // Ç°ÇıºÍºó¼ÌÖ¸Õë
+typedef struct DNode {            // å®šä¹‰åŒé“¾è¡¨ç»“ç‚¹ç±»å‹
+    ElementType data;             // æ•°æ®åŸŸ
+    struct DNode *prior, *next;   // å‰é©±å’Œåç»§æŒ‡é’ˆ
 } DNode, *DLinkList;
 
 bool InitDLinkList(DLinkList &L);
@@ -57,11 +57,11 @@ int main()
 
 bool InitDLinkList(DLinkList &L)
 {
-    L = (DNode *)malloc(sizeof(DNode));  // ·ÖÅäÒ»¸öÍ·½áµã
-    if (L == NULL)                       // ÄÚ´æ²»×ã£¬·ÖÅäÊ§°Ü
+    L = (DNode *)malloc(sizeof(DNode));  // åˆ†é…ä¸€ä¸ªå¤´ç»“ç‚¹
+    if (L == NULL)                       // å†…å­˜ä¸è¶³ï¼Œåˆ†é…å¤±è´¥
         return false;
-    L->prior = L;                        // Í·½áµãµÄ prior Ö¸ÏòÍ·½áµã
-    L->next = L;                         // Í·½áµãµÄ next Ö¸ÏòÍ·½áµã
+    L->prior = L;                        // å¤´ç»“ç‚¹çš„ prior æŒ‡å‘å¤´ç»“ç‚¹
+    L->next = L;                         // å¤´ç»“ç‚¹çš„ next æŒ‡å‘å¤´ç»“ç‚¹
     return true;
 }
 

@@ -1,31 +1,31 @@
 #include <stdio.h>
-#define MaxSize 50              // ¶¨Òå¶ÓÁĞÖĞÔªËØµÄ×î´ó¸öÊı
+#define MaxSize 50              // å®šä¹‰é˜Ÿåˆ—ä¸­å…ƒç´ çš„æœ€å¤§ä¸ªæ•°
 
 typedef int ElementType;
 
 typedef struct {
-    ElementType data[MaxSize];  // ÓÃ¾²Ì¬Êı×é´æ·Å¶ÓÁĞÔªËØ
-    int front, rear;            // ¶ÓÊ×Ö¸ÕëºÍ¶ÓÎ²Ö¸Õë
-    int tag;                    // 0 ±íÊ¾×î½ü³ö¶Ó£¬1 ±íÊ¾×î½üÈë¶Ó¡£
+    ElementType data[MaxSize];  // ç”¨é™æ€æ•°ç»„å­˜æ”¾é˜Ÿåˆ—å…ƒç´ 
+    int front, rear;            // é˜Ÿé¦–æŒ‡é’ˆå’Œé˜Ÿå°¾æŒ‡é’ˆ
+    int tag;                    // 0 è¡¨ç¤ºæœ€è¿‘å‡ºé˜Ÿï¼Œ1 è¡¨ç¤ºæœ€è¿‘å…¥é˜Ÿã€‚
 } SqQueue;
 
 bool EnQueue(SqQueue &Q, ElementType x)
 {
-    if (Q.front == Q.rear && Q.tag == 1)     // ¶ÓÂú
+    if (Q.front == Q.rear && Q.tag == 1)     // é˜Ÿæ»¡
         return false;
-    Q.data[Q.rear] = x;                      // ½« x ²åÈë¶ÓÎ²
-    Q.rear = (Q.rear + 1) % MaxSize;         // ¶ÓÎ²Ö¸Õë¼Ó 1 È¡Ä£
-    Q.tag = 1;                               // ×î½ü²Ù×÷ÎªÈë¶Ó£¬ÖÃ tag Îª 1
+    Q.data[Q.rear] = x;                      // å°† x æ’å…¥é˜Ÿå°¾
+    Q.rear = (Q.rear + 1) % MaxSize;         // é˜Ÿå°¾æŒ‡é’ˆåŠ  1 å–æ¨¡
+    Q.tag = 1;                               // æœ€è¿‘æ“ä½œä¸ºå…¥é˜Ÿï¼Œç½® tag ä¸º 1
     return true;
 }
 
 bool DeQueue(SqQueue &Q, ElementType &x)
 {
-    if (Q.front == Q.rear && Q.tag == 0)     // ¶Ó¿Õ
+    if (Q.front == Q.rear && Q.tag == 0)     // é˜Ÿç©º
         return false;
-    x = Q.data[Q.front];                     // ½«¶ÓÍ·ÔªËØµÄÖµ¸³Óè x
-    Q.front = (Q.front + 1) % MaxSize;       // ¶ÓÍ·Ö¸Õë¼Ó 1 È¡Ä£
-    Q.tag = 0;                               // ×î½ü²Ù×÷Îª³ö¶Ó£¬ÖÃ tag Îª 0
+    x = Q.data[Q.front];                     // å°†é˜Ÿå¤´å…ƒç´ çš„å€¼èµ‹äºˆ x
+    Q.front = (Q.front + 1) % MaxSize;       // é˜Ÿå¤´æŒ‡é’ˆåŠ  1 å–æ¨¡
+    Q.tag = 0;                               // æœ€è¿‘æ“ä½œä¸ºå‡ºé˜Ÿï¼Œç½® tag ä¸º 0
     return true;
 }
 

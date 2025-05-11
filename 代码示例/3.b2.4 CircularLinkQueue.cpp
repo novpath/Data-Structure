@@ -33,8 +33,8 @@ bool Dequeue(LinkQueue &Q, ElementType &x)
 {
     if (Q.front == Q.rear)
         return false;
-    Q.front = Q.front->next;    // front ÒÆ¶¯µ½¶ÓÍ·
-    x = Q.front->data;        // È¡¶ÓÍ·ÔªËØ
+    Q.front = Q.front->next;    // front ç§»åŠ¨åˆ°é˜Ÿå¤´
+    x = Q.front->data;        // å–é˜Ÿå¤´å…ƒç´ 
     return true;
 }
 

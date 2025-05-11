@@ -12,12 +12,12 @@ bool BracketCheck(char str[], int length)
     S.top = -1;
     for (int i = 0; i < length; i++) {
         if (str[i] == '(' || str[i] == '[' || str[i] == '{') {
-        	S.data[++S.top] = str[i]; // ɨ�赽�����ţ���ջ
+        	S.data[++S.top] = str[i]; // É¨Ãèµ½×óÀ¨ºÅ£¬ÈëÕ»
         } else {
-            if (S.top == -1)  		  // ɨ�赽�����ţ��ҵ�ǰջ��
-                return false;   	  // ƥ��ʧ��
+            if (S.top == -1)  		  // É¨Ãèµ½ÓÒÀ¨ºÅ£¬ÇÒµ±Ç°Õ»¿Õ
+                return false;   	  // Æ¥ÅäÊ§°Ü
             char topElem;
-            topElem = S.data[S.top--];// ջ��Ԫ�س�ջ
+            topElem = S.data[S.top--];// Õ»¶¥ÔªËØ³öÕ»
             if (str[i] == ')' && topElem != '(')
                 return false;
             if (str[i] == ']' && topElem != '[')
@@ -26,7 +26,7 @@ bool BracketCheck(char str[], int length)
                 return false;
         }
     }
-    return (S.top == -1);           // ������ȫ�����ź�ջ��˵��ƥ��ɹ�
+    return (S.top == -1);           // ¼ìË÷ÍêÈ«²¿À¨ºÅºó£¬Õ»¿ÕËµÃ÷Æ¥Åä³É¹¦
 }
 
 int main()

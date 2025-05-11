@@ -3,9 +3,9 @@
 
 typedef int ElementType;
 
-typedef struct LNode {  // »ìºÏ¶¨Òåµ¥Á´±íµÄ½áµãÀàĞÍ
-    ElementType data;   // Êı¾İÓò
-    struct LNode *next; // Ö¸ÕëÓò
+typedef struct LNode {  // æ··åˆå®šä¹‰å•é“¾è¡¨çš„ç»“ç‚¹ç±»å‹
+    ElementType data;   // æ•°æ®åŸŸ
+    struct LNode *next; // æŒ‡é’ˆåŸŸ
 } LNode, *LinkList; 
 
 bool InitList(LinkList &L);
@@ -14,13 +14,13 @@ void PrintList(LinkList &L);
 
 LinkList ReverseLinkList(LinkList &L)
 {
-    if (L == NULL || L->next == NULL)  // L ºÏ·¨ĞÔ¼ì²é
+    if (L == NULL || L->next == NULL)  // L åˆæ³•æ€§æ£€æŸ¥
         return L;
-    LNode *p = L->next, *q;            // p Îª¹¤×÷Ö¸Õë£¬r Îª p µÄºó¼Ì£¬ÒÔ·À¶ÏÁ´
-    L->next = NULL;                    // Í·½áµã L µÄ next ÓòÖÃÎª NULL
-    while (p != NULL) {                // ÒÀ´Î½«ÔªËØ½áµãÕªÏÂ
-        q = p->next;                   // Ôİ´æ p µÄºó¼Ì
-        p->next = L->next;             // ½« p ½áµã²åÈëµ½Í·½áµãÖ®ºó
+    LNode *p = L->next, *q;            // p ä¸ºå·¥ä½œæŒ‡é’ˆï¼Œr ä¸º p çš„åç»§ï¼Œä»¥é˜²æ–­é“¾
+    L->next = NULL;                    // å¤´ç»“ç‚¹ L çš„ next åŸŸç½®ä¸º NULL
+    while (p != NULL) {                // ä¾æ¬¡å°†å…ƒç´ ç»“ç‚¹æ‘˜ä¸‹
+        q = p->next;                   // æš‚å­˜ p çš„åç»§
+        p->next = L->next;             // å°† p ç»“ç‚¹æ’å…¥åˆ°å¤´ç»“ç‚¹ä¹‹å
         L->next = p;
         p = q;
     }
@@ -29,17 +29,17 @@ LinkList ReverseLinkList(LinkList &L)
 
 LinkList TriPtrReverse(LinkList L)
 {
-    if (L == NULL)      // ¿Õ±íµÄÊ±ºòÖ±½Ó·µ»Ø£¬Ìá¸ß½¡×³ĞÔ
+    if (L == NULL)      // ç©ºè¡¨çš„æ—¶å€™ç›´æ¥è¿”å›ï¼Œæé«˜å¥å£®æ€§
         return L;
     LNode *pre, *p = L->next, *r = p->next;
-    p->next = NULL;     // ´¦ÀíµÚÒ»¸ö½áµã
-    while (r != NULL) { // r Îª¿Õ£¬ÔòËµÃ÷ p Îª×îºóÒ»¸ö½áµã
+    p->next = NULL;     // å¤„ç†ç¬¬ä¸€ä¸ªç»“ç‚¹
+    while (r != NULL) { // r ä¸ºç©ºï¼Œåˆ™è¯´æ˜ p ä¸ºæœ€åä¸€ä¸ªç»“ç‚¹
         pre = p;
         p = r;
         r = r->next;
-        p->next = pre;  // Ö¸Õë·´×ª
+        p->next = pre;  // æŒ‡é’ˆåè½¬
     }
-    L->next = p;        // ´¦Àí×îºóÒ»¸ö½áµã
+    L->next = p;        // å¤„ç†æœ€åä¸€ä¸ªç»“ç‚¹
     return L;
 }
 
@@ -67,31 +67,31 @@ int main()
 	return 0;
 }
 
-bool InitList(LinkList &L)              // ´øÍ·½áµãµÄµ¥Á´±íµÄ³õÊ¼»¯
+bool InitList(LinkList &L)              // å¸¦å¤´ç»“ç‚¹çš„å•é“¾è¡¨çš„åˆå§‹åŒ–
 {
-    L = (LNode *)malloc(sizeof(LNode)); // ´´½¨Í·½áµã
-    if (L == NULL)                      // ÄÚ´æ²»×ã£¬·ÖÅäÊ§°Ü
+    L = (LNode *)malloc(sizeof(LNode)); // åˆ›å»ºå¤´ç»“ç‚¹
+    if (L == NULL)                      // å†…å­˜ä¸è¶³ï¼Œåˆ†é…å¤±è´¥
         return false;
-    L->next = NULL;                     // Í·½áµãµÄÖ¸ÕëÓòÎª¿Õ
+    L->next = NULL;                     // å¤´ç»“ç‚¹çš„æŒ‡é’ˆåŸŸä¸ºç©º
     return true;
 }
 
 bool ListInsert(LinkList &L, int i, ElementType e)
 {
-    if (i < 1)                       // i ÖµºÏ·¨ĞÔ¼ì²é
+    if (i < 1)                       // i å€¼åˆæ³•æ€§æ£€æŸ¥
         return false;
-    LNode *p = L;                    // Ö¸Õë p Ö¸Ïòµ±Ç°É¨Ãèµ½µÄ½áµã
-    int j = 0;                       // ¼ÇÂ¼µ±Ç°½áµãµÄÎ»Ğò£¬Í·½áµãÊÇµÚ 0 ¸ö½áµã
-    while (p != NULL && j < i - 1) { // Ñ­»·ÕÒµ½µÚ i-1 ¸ö½áµã
+    LNode *p = L;                    // æŒ‡é’ˆ p æŒ‡å‘å½“å‰æ‰«æåˆ°çš„ç»“ç‚¹
+    int j = 0;                       // è®°å½•å½“å‰ç»“ç‚¹çš„ä½åºï¼Œå¤´ç»“ç‚¹æ˜¯ç¬¬ 0 ä¸ªç»“ç‚¹
+    while (p != NULL && j < i - 1) { // å¾ªç¯æ‰¾åˆ°ç¬¬ i-1 ä¸ªç»“ç‚¹
         p = p->next;
         j++;
     }
-    if (p == NULL)                   // i Öµ²»ºÏ·¨
+    if (p == NULL)                   // i å€¼ä¸åˆæ³•
         return false;
     LNode *s = (LNode *)malloc(sizeof(LNode));
     s->data = e; 
-    s->next = p->next;               // ĞÂ½áµãÏÈ½ÓÉÏºó¼Ì½áµã
-    p->next = s;                     // Ç°Çı½áµã½ÓÉÏĞÂ½áµã£¨Í¬Ê±¶Ï¿ªÔ­ºó¼Ì½áµãÁ¬½Ó£©
+    s->next = p->next;               // æ–°ç»“ç‚¹å…ˆæ¥ä¸Šåç»§ç»“ç‚¹
+    p->next = s;                     // å‰é©±ç»“ç‚¹æ¥ä¸Šæ–°ç»“ç‚¹ï¼ˆåŒæ—¶æ–­å¼€åŸåç»§ç»“ç‚¹è¿æ¥ï¼‰
     return true;
 }
 

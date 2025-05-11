@@ -1,30 +1,30 @@
-/* ACwing 3874 ÈıÔª×éµÄ×îĞ¡¾àÀë */
+/* ACwing 3874 ä¸‰å…ƒç»„çš„æœ€å°è·ç¦» */
 
 #include <stdio.h>
 #define INT_MAX 1e19
 typedef long long LL;
 
-LL Abs(LL a)        //¼ÆËã¾ø¶ÔÖµ
+LL Abs(LL a)        //è®¡ç®—ç»å¯¹å€¼
 {
     if(a < 0) return -a;
     else return a;
 }
 
-bool IsFirstMin(int a, int b, int c)    //ÊÇ·ñÊÇÈı¸öÊıÖĞµÄ×îĞ¡Öµ
+bool IsFirstMin(int a, int b, int c)    //æ˜¯å¦æ˜¯ä¸‰ä¸ªæ•°ä¸­çš„æœ€å°å€¼
 {
     if ((a <= b) && (a <= c)) 
         return true;
     return false;
 }
 
-LL FindMinTrip(int A[], int l, int B[], int m, int C[], int n)  // D_min ÓÃÓÚ¼ÇÂ¼ÈıÔª×éµÄ×îĞ¡¾àÀë£¬³õÊ¼¸³ÖµÎªINT_MAX
+LL FindMinTrip(int A[], int l, int B[], int m, int C[], int n)  // D_min ç”¨äºè®°å½•ä¸‰å…ƒç»„çš„æœ€å°è·ç¦»ï¼Œåˆå§‹èµ‹å€¼ä¸ºINT_MAX
 {
     int i = 0, j = 0, k = 0;
     LL D_min = INT_MAX, D;
     while (i < l && j < m && k < n && D_min > 0 ) {
-        D = Abs(A[i] - B[j]) + Abs(B[j] - C[k]) + Abs(C[k] - A[i]);  // ¼ÆËã D
-        if (D < D_min) D_min = D;                                    // ¸üĞÂ D
-        if (IsFirstMin(A[i],B[j],C[k])) i++;                         // ¸üĞÂ a
+        D = Abs(A[i] - B[j]) + Abs(B[j] - C[k]) + Abs(C[k] - A[i]);  // è®¡ç®— D
+        if (D < D_min) D_min = D;                                    // æ›´æ–° D
+        if (IsFirstMin(A[i],B[j],C[k])) i++;                         // æ›´æ–° a
         else if (IsFirstMin(B[j],C[k],A[i])) j++;
         else k++;
     }

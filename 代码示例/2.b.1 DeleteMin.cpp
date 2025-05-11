@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXSIZE 50    //±í×î´ó³¤¶ÈµÄ¶¨Òå
+#define MAXSIZE 50    //è¡¨æœ€å¤§é•¿åº¦çš„å®šä¹‰
 
 typedef int ElementType;
 
 typedef struct {
-    ElementType data[MAXSIZE];   //Ë³Ğò±íµÄÔªËØ
-    int length;                  //Ë³Ğò±íµÄµ±Ç°³¤¶È
-} SqList;                        //Ë³Ğò±íµÄ½á¹¹ÀàĞÍ¶¨Òå
+    ElementType data[MAXSIZE];   //é¡ºåºè¡¨çš„å…ƒç´ 
+    int length;                  //é¡ºåºè¡¨çš„å½“å‰é•¿åº¦
+} SqList;                        //é¡ºåºè¡¨çš„ç»“æ„ç±»å‹å®šä¹‰
 
 void InitList(SqList &L);
 ElementType LocateElem(SqList L, ElementType e);
@@ -19,11 +19,11 @@ bool DeleteMin(SqList &L, ElementType &e);
 
 int main()
 {
-    SqList L;          //ÉùÃ÷Ò»¸öË³Ğò±í
+    SqList L;          //å£°æ˜ä¸€ä¸ªé¡ºåºè¡¨
     int e = 0;
     printf("%d\n", e);
     
-    InitList(L);       //³õÊ¼»¯Ë³Ğò±í
+    InitList(L);       //åˆå§‹åŒ–é¡ºåºè¡¨
     ListInsert(L, 1, 1);
     ListInsert(L, 2, 2);
     ListInsert(L, 3, 3);
@@ -38,7 +38,7 @@ int main()
 
 void InitList(SqList &L)    
 { 
-     L.length = 0;      //Ë³Ğò±í³õÊ¼³¤¶ÈÎª 0
+     L.length = 0;      //é¡ºåºè¡¨åˆå§‹é•¿åº¦ä¸º 0
 }
 
 ElementType LocateElem(SqList L, ElementType e)
@@ -46,8 +46,8 @@ ElementType LocateElem(SqList L, ElementType e)
     int i;
     for(i = 0; i < L.length; i++)
         if (L.data[i] == e)
-            return i + 1;        //ÏÂ±êÎª i µÄÔªËØµÈÓÚ e£¬ÕÒµ½·µ»ØÎ»Ğò i + 1
-    return 0;                    //²éÕÒÊ§°Ü£¬·µ»Ø 0
+            return i + 1;        //ä¸‹æ ‡ä¸º i çš„å…ƒç´ ç­‰äº eï¼Œæ‰¾åˆ°è¿”å›ä½åº i + 1
+    return 0;                    //æŸ¥æ‰¾å¤±è´¥ï¼Œè¿”å› 0
 }
 
 ElementType GetElem(SqList L, int i)
@@ -57,31 +57,31 @@ ElementType GetElem(SqList L, int i)
 
 bool ListInsert(SqList &L, int i, int e)
 { 
-    if (L.length == MAXSIZE) {          // ±í¿Õ¼äÒÑÂú£¬²»ÄÜ²åÈë
+    if (L.length == MAXSIZE) {          // è¡¨ç©ºé—´å·²æ»¡ï¼Œä¸èƒ½æ’å…¥
         printf("Sequence list full!\n"); 
         return false; 
     } 
-    if (i < 1 || i > L.length + 1) {      // ¼ì²é²åÈëÎ»ÖÃµÄºÏ·¨ĞÔ£¬×¢Òâ¿ÉÒÔ²åÈë length Î»ÖÃ(Ä©Î²)
+    if (i < 1 || i > L.length + 1) {      // æ£€æŸ¥æ’å…¥ä½ç½®çš„åˆæ³•æ€§ï¼Œæ³¨æ„å¯ä»¥æ’å…¥ length ä½ç½®(æœ«å°¾)
         printf("Illegal location!\n");
         return false; 
     } 
     for (int j = L.length; j >= i; j--)
-        L.data[j] = L.data[j - 1];     // ½« ai¡« an µ¹ĞòÏòºóÒÆ¶¯
-    L.data[i - 1] = e;                 // ĞÂÔªËØ²åÈë
-    L.length++;                        // ±í³¤¼ÓÒ»
+        L.data[j] = L.data[j - 1];     // å°† aiï½ an å€’åºå‘åç§»åŠ¨
+    L.data[i - 1] = e;                 // æ–°å…ƒç´ æ’å…¥
+    L.length++;                        // è¡¨é•¿åŠ ä¸€
     return true; 
 }
 
 bool ListDelete(SqList &L, int i, ElementType &e)
 { 
-    if (i < 1 || i > L.length) {     // ¼ì²é¿Õ±í¼°É¾³ıÎ»ÖÃµÄºÏ·¨ĞÔ
+    if (i < 1 || i > L.length) {     // æ£€æŸ¥ç©ºè¡¨åŠåˆ é™¤ä½ç½®çš„åˆæ³•æ€§
         printf ("The %d-th element does not exist.\n", i); 
         return false; 
     }
-    e = L.data[i - 1];               // ±»É¾³ıÔªËØ¸³Öµ¸øÒıÓÃ±äÁ¿ e
+    e = L.data[i - 1];               // è¢«åˆ é™¤å…ƒç´ èµ‹å€¼ç»™å¼•ç”¨å˜é‡ e
     for (int j = i; j < L.length; j++)
-        L.data[j - 1] = L.data[j];   // ½« ai+1~an Ë³ĞòÏòÇ°ÒÆ¶¯
-    L.length--;                      // ÏßĞÔ±í³¤¶È¼õ 1
+        L.data[j - 1] = L.data[j];   // å°† ai+1~an é¡ºåºå‘å‰ç§»åŠ¨
+    L.length--;                      // çº¿æ€§è¡¨é•¿åº¦å‡ 1
     return true; 
 }
 
@@ -89,15 +89,15 @@ bool DeleteMin(SqList &L, ElementType &e)
 {
     if(L.length <= 0)
         return false;
-    e = L.data[0];                        //¼ÙÉè 0 ºÅÔªËØÖµ×îĞ¡
-    int index = 0;                        //±éÀúË³Ğò±íÑ°ÕÒ×îĞ¡ÖµÔªËØ
+    e = L.data[0];                        //å‡è®¾ 0 å·å…ƒç´ å€¼æœ€å°
+    int index = 0;                        //éå†é¡ºåºè¡¨å¯»æ‰¾æœ€å°å€¼å…ƒç´ 
     for(int i = 1; i < L.length; i++) {
-        if(L.data[i] < e) {               //e ¼ÇÂ¼×îĞ¡Öµ
+        if(L.data[i] < e) {               //e è®°å½•æœ€å°å€¼
             e = L.data[i];
             index = i;
         }
     }
-    L.data[index] = L.data[L.length - 1]; //É¾³ıÎ»ÖÃÓÉ±íÎ²ÔªËØÌî²¹
+    L.data[index] = L.data[L.length - 1]; //åˆ é™¤ä½ç½®ç”±è¡¨å°¾å…ƒç´ å¡«è¡¥
     L.length--;
     return true;
 }

@@ -1,5 +1,5 @@
 /**
- * leetcode 2130 ‘≠Ã‚-Accepted 
+ * leetcode 2130 - Accepted
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;

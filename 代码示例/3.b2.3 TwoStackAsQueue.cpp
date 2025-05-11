@@ -1,11 +1,11 @@
 #include <stdio.h>
-#define MaxSize 5              // ¶¨Òå¶ÓÁĞÖĞÔªËØµÄ×î´ó¸öÊı
+#define MaxSize 5              // å®šä¹‰é˜Ÿåˆ—ä¸­å…ƒç´ çš„æœ€å¤§ä¸ªæ•°
 
 typedef int ElementType;
 
 typedef struct {
-    ElementType data[MaxSize]; // ¾²Ì¬Êı×é´æ·ÅÕ»ÖĞÔªËØ
-    int top;                   // Õ»¶¥Ö¸Õë
+    ElementType data[MaxSize]; // é™æ€æ•°ç»„å­˜æ”¾æ ˆä¸­å…ƒç´ 
+    int top;                   // æ ˆé¡¶æŒ‡é’ˆ
 } SqStack;
 
 void InitStack(SqStack &S); 
@@ -99,38 +99,38 @@ int main()
 
 void InitStack(SqStack &S)
 {
-    S.top = -1;                // ³õÊ¼»¯Õ»¶¥Ö¸Õë
+    S.top = -1;                // åˆå§‹åŒ–æ ˆé¡¶æŒ‡é’ˆ
 }
 
 bool StackEmpty(SqStack S)
 {
-    if (S.top == -1)       // Õ»¿Õ
+    if (S.top == -1)       // æ ˆç©º
         return true;
-    else                   // ²»¿Õ
+    else                   // ä¸ç©º
         return false;
 }
 
 bool StackOverflow(SqStack S)
 {
-    if (S.top == MaxSize - 1) // Õ»Âú
+    if (S.top == MaxSize - 1) // æ ˆæ»¡
         return true;
-    else                      // ²»Âú
+    else                      // ä¸æ»¡
         return false;
 }
 
 bool Push(SqStack &S, ElementType x)
 {
-    if (S.top == MaxSize - 1)     // Õ»Âú£¬±¨´í
+    if (S.top == MaxSize - 1)     // æ ˆæ»¡ï¼ŒæŠ¥é”™
         return false;
-    S.data[++S.top] = x;          // Ö¸ÕëÏÈ¼Ó 1£¬ÔÙÈëÕ»
+    S.data[++S.top] = x;          // æŒ‡é’ˆå…ˆåŠ  1ï¼Œå†å…¥æ ˆ
     return true;
 }
 
 bool Pop(SqStack &S, ElementType &x)
 {
-    if (S.top == -1)        // Õ»¿Õ£¬±¨´í
+    if (S.top == -1)        // æ ˆç©ºï¼ŒæŠ¥é”™
         return false;
-    x = S.data[S.top--];    // ÏÈ³öÕ»£¬Ö¸ÕëÔÙ¼õ 1
+    x = S.data[S.top--];    // å…ˆå‡ºæ ˆï¼ŒæŒ‡é’ˆå†å‡ 1
     return true;
 }
 

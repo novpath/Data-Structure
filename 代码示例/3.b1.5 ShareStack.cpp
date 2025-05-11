@@ -1,47 +1,47 @@
 #include <stdio.h>
-#define MaxSize 100            // ´æ´¢Êý¾ÝÔªËØµÄ×î´ó¸öÊý
+#define MaxSize 100            // å­˜å‚¨æ•°æ®å…ƒç´ çš„æœ€å¤§ä¸ªæ•°
 
 typedef int ElementType;
 
 typedef struct ShareStack {
     ElementType data[MaxSize]; 
-    int Top0;                  // ¶ÑÕ» 0 µÄÕ»¶¥Ö¸Õë
-    int Top1;                  // ¶ÑÕ» 1 µÄÕ»¶¥Ö¸Õë
+    int Top0;                  // å †æ ˆ 0 çš„æ ˆé¡¶æŒ‡é’ˆ
+    int Top1;                  // å †æ ˆ 1 çš„æ ˆé¡¶æŒ‡é’ˆ
 } ShStack, *LinkShStack;
 
-void InitStack(ShStack &S)  // ³õÊ¼»¯Õ»¶¥Ö¸Õë
+void InitStack(ShStack &S)  // åˆå§‹åŒ–æ ˆé¡¶æŒ‡é’ˆ
 {
     S.Top0 = -1;
     S.Top1 = MaxSize;
 }
 
-bool Push(ShStack *PtrS, ElementType x, int Tag)// Tag ×÷ÎªÇø·ÖÁ½¸ö¶ÑÕ»µÄ±êÖ¾£¬È¡ÖµÎª 0 ºÍ 1
+bool Push(ShStack *PtrS, ElementType x, int Tag)// Tag ä½œä¸ºåŒºåˆ†ä¸¤ä¸ªå †æ ˆçš„æ ‡å¿—ï¼Œå–å€¼ä¸º 0 å’Œ 1
 {          
     if (Tag != 0 && Tag != 1)
         return false;                             
-    if (PtrS->Top1 - PtrS->Top0 == 1) {         // Á½¸öÕ»¶¥Ö¸ÕëÏàÁÚ£¬¶ÑÕ»Âú
+    if (PtrS->Top1 - PtrS->Top0 == 1) {         // ä¸¤ä¸ªæ ˆé¡¶æŒ‡é’ˆç›¸é‚»ï¼Œå †æ ˆæ»¡
         return false;
     }
-    if (Tag == 0)                               // ¶ÔµÚ 0 ¸ö¶ÑÕ»²Ù×÷
+    if (Tag == 0)                               // å¯¹ç¬¬ 0 ä¸ªå †æ ˆæ“ä½œ
         PtrS->data[++(PtrS->Top0)] = x;
-    else                                        // ¶ÔµÚ 1 ¸ö¶ÑÕ»²Ù×÷
+    else                                        // å¯¹ç¬¬ 1 ä¸ªå †æ ˆæ“ä½œ
         PtrS->data[--(PtrS->Top1)] = x;
     return true;
 }
 
-bool Pop(ShStack *PtrS, ElementType &x, int Tag) // Tag ×÷ÎªÇø·ÖÁ½¸ö¶ÑÕ»µÄ±êÖ¾£¬È¡ÖµÎª 0 ºÍ 1
+bool Pop(ShStack *PtrS, ElementType &x, int Tag) // Tag ä½œä¸ºåŒºåˆ†ä¸¤ä¸ªå †æ ˆçš„æ ‡å¿—ï¼Œå–å€¼ä¸º 0 å’Œ 1
 {
     if (Tag != 0 && Tag != 1)
         return false;                         
-    if (Tag == 0) {                   // ¶ÔµÚ 0 ¸ö¶ÑÕ»²Ù×÷
-        if (PtrS->Top0 == -1) {       // Õ» 0 ¿Õ
+    if (Tag == 0) {                   // å¯¹ç¬¬ 0 ä¸ªå †æ ˆæ“ä½œ
+        if (PtrS->Top0 == -1) {       // æ ˆ 0 ç©º
             return false;
         } else {
             x = PtrS->data[(PtrS->Top0)--];
             return true;
         }
-    } else {                          // ¶ÔµÚ 1 ¸ö¶ÑÕ»²Ù×÷
-        if (PtrS->Top1 == MaxSize) {  // Õ» 1 ¿Õ
+    } else {                          // å¯¹ç¬¬ 1 ä¸ªå †æ ˆæ“ä½œ
+        if (PtrS->Top1 == MaxSize) {  // æ ˆ 1 ç©º
             return false;
         } else {
             x = PtrS->data[(PtrS->Top1)++];

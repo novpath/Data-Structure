@@ -3,7 +3,7 @@
 #include <math.h>
 clock_t start, stop; 
 double duration;
-#define MAXN 10000 /* Êı¾İÁ¿ */
+#define MAXN 10000 /* æ•°æ®é‡ */
 void PrintN1 ( int N );
 void PrintN2 ( int N );
 void run(void(*f)(int), int case_n)

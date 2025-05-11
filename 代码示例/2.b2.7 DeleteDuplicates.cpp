@@ -1,5 +1,5 @@
 /**
- * Leetcode 83 Ô­Ìâ - Accepted 
+ * Leetcode 83 åŸé¢˜ - Accepted 
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;
@@ -7,7 +7,7 @@
  * };
  */
  
- /* ·½·¨Ò»£ºÖ±½ÓÉ¾³ı */
+ /* æ–¹æ³•ä¸€ï¼šç›´æ¥åˆ é™¤ */
 struct ListNode* deleteDuplicates(struct ListNode* head) {
     if (head == NULL) return head;
     struct ListNode *p = head, *q;
@@ -23,7 +23,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head) {
     return head;
 }
 
-/* ·½·¨¶ş£ºÎ²²å·¨ */ 
+/* æ–¹æ³•äºŒï¼šå°¾æ’æ³• */ 
 struct ListNode* deleteDuplicates(struct ListNode* head) {
     if (head == NULL) return head;
     struct ListNode *r = head;

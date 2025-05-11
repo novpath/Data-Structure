@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXSIZE 50    //±í×î´ó³¤¶ÈµÄ¶¨Òå
+#define MAXSIZE 50    //è¡¨æœ€å¤§é•¿åº¦çš„å®šä¹‰
 
 typedef int ElementType;
 
 typedef struct {
-    ElementType data[MAXSIZE];   //Ë³Ğò±íµÄÔªËØ
-    int length;                  //Ë³Ğò±íµÄµ±Ç°³¤¶È
-} SqList;                        //Ë³Ğò±íµÄ½á¹¹ÀàĞÍ¶¨Òå
+    ElementType data[MAXSIZE];   //é¡ºåºè¡¨çš„å…ƒç´ 
+    int length;                  //é¡ºåºè¡¨çš„å½“å‰é•¿åº¦
+} SqList;                        //é¡ºåºè¡¨çš„ç»“æ„ç±»å‹å®šä¹‰
 
 void InitList(SqList &L);
 ElementType LocateElem(SqList L, ElementType e);
@@ -20,15 +20,15 @@ bool MergeSqList(SqList La, SqList Lb, SqList &Lc);
 
 int main()
 {
-    SqList La;          //ÉùÃ÷Ò»¸öË³Ğò±í La
-    SqList Lb;          //ÉùÃ÷Ò»¸öË³Ğò±í Lb
-    SqList Lc;          //ÉùÃ÷Ò»¸öË³Ğò±í Lc
+    SqList La;          //å£°æ˜ä¸€ä¸ªé¡ºåºè¡¨ La
+    SqList Lb;          //å£°æ˜ä¸€ä¸ªé¡ºåºè¡¨ Lb
+    SqList Lc;          //å£°æ˜ä¸€ä¸ªé¡ºåºè¡¨ Lc
     
-    InitList(La);       //³õÊ¼»¯Ë³Ğò±í
+    InitList(La);       //åˆå§‹åŒ–é¡ºåºè¡¨
     ListInsert(La, 1, 1); ListInsert(La, 2, 3); ListInsert(La, 3, 5); ListInsert(La, 4, 7);
     ListInsert(La, 5, 9); ListInsert(La, 6, 11); ListInsert(La, 7, 14); ListInsert(La, 8, 16);
     
-    InitList(Lb);       //³õÊ¼»¯Ë³Ğò±í
+    InitList(Lb);       //åˆå§‹åŒ–é¡ºåºè¡¨
     ListInsert(Lb, 1, 2); ListInsert(Lb, 2, 4); ListInsert(Lb, 3, 6); ListInsert(Lb, 4, 8);
     ListInsert(Lb, 5, 10); ListInsert(Lb, 6, 12); 
     
@@ -40,7 +40,7 @@ int main()
 
 void InitList(SqList &L)    
 { 
-     L.length = 0;      //Ë³Ğò±í³õÊ¼³¤¶ÈÎª 0
+     L.length = 0;      //é¡ºåºè¡¨åˆå§‹é•¿åº¦ä¸º 0
 }
 
 ElementType LocateElem(SqList L, ElementType e)
@@ -48,8 +48,8 @@ ElementType LocateElem(SqList L, ElementType e)
     int i;
     for(i = 0; i < L.length; i++)
         if (L.data[i] == e)
-            return i + 1;        //ÏÂ±êÎª i µÄÔªËØµÈÓÚ e£¬ÕÒµ½·µ»ØÎ»Ğò i + 1
-    return 0;                    //²éÕÒÊ§°Ü£¬·µ»Ø 0
+            return i + 1;        //ä¸‹æ ‡ä¸º i çš„å…ƒç´ ç­‰äº eï¼Œæ‰¾åˆ°è¿”å›ä½åº i + 1
+    return 0;                    //æŸ¥æ‰¾å¤±è´¥ï¼Œè¿”å› 0
 }
 
 ElementType GetElem(SqList L, int i)
@@ -59,31 +59,31 @@ ElementType GetElem(SqList L, int i)
 
 bool ListInsert(SqList &L, int i, int e)
 { 
-    if (L.length == MAXSIZE) {          // ±í¿Õ¼äÒÑÂú£¬²»ÄÜ²åÈë
+    if (L.length == MAXSIZE) {          // è¡¨ç©ºé—´å·²æ»¡ï¼Œä¸èƒ½æ’å…¥
         printf("Sequence list full!\n"); 
         return false; 
     } 
-    if (i < 1 || i > L.length + 1) {      // ¼ì²é²åÈëÎ»ÖÃµÄºÏ·¨ĞÔ£¬×¢Òâ¿ÉÒÔ²åÈë length Î»ÖÃ(Ä©Î²)
+    if (i < 1 || i > L.length + 1) {      // æ£€æŸ¥æ’å…¥ä½ç½®çš„åˆæ³•æ€§ï¼Œæ³¨æ„å¯ä»¥æ’å…¥ length ä½ç½®(æœ«å°¾)
         printf("Illegal location!\n");
         return false; 
     } 
     for (int j = L.length; j >= i; j--)
-        L.data[j] = L.data[j - 1];     // ½« ai¡« an µ¹ĞòÏòºóÒÆ¶¯
-    L.data[i - 1] = e;                 // ĞÂÔªËØ²åÈë
-    L.length++;                        // ±í³¤¼ÓÒ»
+        L.data[j] = L.data[j - 1];     // å°† aiï½ an å€’åºå‘åç§»åŠ¨
+    L.data[i - 1] = e;                 // æ–°å…ƒç´ æ’å…¥
+    L.length++;                        // è¡¨é•¿åŠ ä¸€
     return true; 
 }
 
 bool ListDelete(SqList &L, int i, ElementType &e)
 { 
-    if (i < 1 || i > L.length) {     // ¼ì²é¿Õ±í¼°É¾³ıÎ»ÖÃµÄºÏ·¨ĞÔ
+    if (i < 1 || i > L.length) {     // æ£€æŸ¥ç©ºè¡¨åŠåˆ é™¤ä½ç½®çš„åˆæ³•æ€§
         printf ("The %d-th element does not exist.\n", i); 
         return false; 
     }
-    e = L.data[i - 1];               // ±»É¾³ıÔªËØ¸³Öµ¸øÒıÓÃ±äÁ¿ e
+    e = L.data[i - 1];               // è¢«åˆ é™¤å…ƒç´ èµ‹å€¼ç»™å¼•ç”¨å˜é‡ e
     for (int j = i; j < L.length; j++)
-        L.data[j - 1] = L.data[j];   // ½« ai+1~an Ë³ĞòÏòÇ°ÒÆ¶¯
-    L.length--;                      // ÏßĞÔ±í³¤¶È¼õ 1
+        L.data[j - 1] = L.data[j];   // å°† ai+1~an é¡ºåºå‘å‰ç§»åŠ¨
+    L.length--;                      // çº¿æ€§è¡¨é•¿åº¦å‡ 1
     return true; 
 }
 
@@ -95,21 +95,21 @@ void PrintSqList(SqList &L)
 
 bool MergeSqList(SqList La, SqList Lb, SqList &Lc)
 {
-    if(La.length + Lb.length > MAXSIZE)  // ºÏ²¢ºóµÄĞÂ±í³¤¶È³¬¹ı×î´ó·¶Î§Ôò±¨´í
+    if(La.length + Lb.length > MAXSIZE)  // åˆå¹¶åçš„æ–°è¡¨é•¿åº¦è¶…è¿‡æœ€å¤§èŒƒå›´åˆ™æŠ¥é”™
         return false;
     int i = 0,  j = 0, k = 0;
-    while(i < La.length && j < Lb.length) { // Á½Á½±È½Ï£¬Ğ¡µÄÔªËØ´æÈë½á¹û±í Lc
+    while(i < La.length && j < Lb.length) { // ä¸¤ä¸¤æ¯”è¾ƒï¼Œå°çš„å…ƒç´ å­˜å…¥ç»“æœè¡¨ Lc
         if(La.data[i] <= Lb.data[j])
             Lc.data[k++] = La.data[i++];
         else
             Lc.data[k++] = Lb.data[j++];
     }
     
-    while(i < La.length)                    // Ã»±ÈÍêµÄË³Ğò±íÆ´½Óµ½ Lc ºóÃæ£¬Á½¸ö while Ö»»áÉúĞ§Ò»¸ö
+    while(i < La.length)                    // æ²¡æ¯”å®Œçš„é¡ºåºè¡¨æ‹¼æ¥åˆ° Lc åé¢ï¼Œä¸¤ä¸ª while åªä¼šç”Ÿæ•ˆä¸€ä¸ª
         Lc.data[k++] = La.data[i++];
     while(j < Lb.length)
         Lc.data[k++] = Lb.data[j++];
-    Lc.length = k;                          // ×¢Òâ±ß½çÌõ¼ş£¬k µÄÖµÎª±í³¤£¬ÒòÎª´¦ÀíÍêºó»¹Òª×ÔÔöÒ»´Î¡£
+    Lc.length = k;                          // æ³¨æ„è¾¹ç•Œæ¡ä»¶ï¼Œk çš„å€¼ä¸ºè¡¨é•¿ï¼Œå› ä¸ºå¤„ç†å®Œåè¿˜è¦è‡ªå¢ä¸€æ¬¡ã€‚
     
     return true;
 }

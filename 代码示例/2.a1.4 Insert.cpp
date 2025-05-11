@@ -9,8 +9,8 @@ struct Node {
 };
 typedef PtrToNode List;
 
-List Read(); /* Ï¸½ÚÔÚ´Ë²»±í */
-void Print( List L ); /* Ï¸½ÚÔÚ´Ë²»±í */
+List Read(); /* ç»†èŠ‚åœ¨æ­¤ä¸è¡¨ */
+void Print( List L ); /* ç»†èŠ‚åœ¨æ­¤ä¸è¡¨ */
 
 List Insert( List L, ElementType X );
 
@@ -28,11 +28,11 @@ int main()
 List Insert(List L, ElementType X)
 {
     List p = L;
-    while (p->Next != NULL && p->Next->Data < X)   // ±éÀúÍêÕû¸öÁ´±í»òÕßÕÒµ½²åÈëÎ»ÖÃ£¬½áÊøÑ­»·
+    while (p->Next != NULL && p->Next->Data < X)   // éå†å®Œæ•´ä¸ªé“¾è¡¨æˆ–è€…æ‰¾åˆ°æ’å…¥ä½ç½®ï¼Œç»“æŸå¾ªç¯
         p = p->Next;
-    List s = (List)malloc(sizeof(struct Node));    // ÉêÇëĞÂ½áµã
+    List s = (List)malloc(sizeof(struct Node));    // ç”³è¯·æ–°ç»“ç‚¹
     s->Data = X;
-    s->Next = p->Next;                             // ²åÈëĞÂ½áµã
+    s->Next = p->Next;                             // æ’å…¥æ–°ç»“ç‚¹
     p->Next = s;
 
     return L;

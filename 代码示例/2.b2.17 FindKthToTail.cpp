@@ -1,5 +1,5 @@
 /**
- * AcWing 33 ¿‡À∆ - Accepted 
+ * AcWing 33 - Accepted
  * Definition for singly-linked list.
  * struct ListNode {
  *     int val;

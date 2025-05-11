@@ -8,8 +8,8 @@ struct Node {
 };
 typedef PtrToNode List;
 
-List Read(); /* Ï¸½ÚÔÚ´Ë²»±í */
-void Print( List L ); /* Ï¸½ÚÔÚ´Ë²»±í£»¿ÕÁ´±í½«Êä³öNULL */
+List Read(); /* ç»†èŠ‚åœ¨æ­¤ä¸è¡¨ */
+void Print( List L ); /* ç»†èŠ‚åœ¨æ­¤ä¸è¡¨ï¼›ç©ºé“¾è¡¨å°†è¾“å‡ºNULL */
 
 List Merge( List L1, List L2 );
 
@@ -27,7 +27,7 @@ int main()
 
 List Merge(List L1, List L2)
 {
-    List p = L1->Next, q = L2->Next, r;    // Éè¹¤×÷Ö¸Õë·Ö±ðÎª p ºÍ q
+    List p = L1->Next, q = L2->Next, r;    // è®¾å·¥ä½œæŒ‡é’ˆåˆ†åˆ«ä¸º p å’Œ q
 
     List L = (List)malloc(sizeof(struct Node));
     r = L;

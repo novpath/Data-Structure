@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define MAXSIZE 50    //±í×î´ó³¤¶ÈµÄ¶¨Òå
+#define MAXSIZE 50    //è¡¨æœ€å¤§é•¿åº¦çš„å®šä¹‰
 
 typedef int ElementType;
 
@@ -20,27 +20,27 @@ int main()
 
 void SearchExchangeInsert(ElementType A[], int &n, ElementType x)
 {
-    int low = 0, high = n - 1, mid;       // n ÎªË³Ğò±í³¤¶È, low ºÍ high ÎªÊı×é A[] µÄÏÂ±ê·¶Î§
+    int low = 0, high = n - 1, mid;       // n ä¸ºé¡ºåºè¡¨é•¿åº¦, low å’Œ high ä¸ºæ•°ç»„ A[] çš„ä¸‹æ ‡èŒƒå›´
     while (low <= high) {
         mid = (low + high) / 2;        
         if (x == A[mid])
             break;
-        else if (x < A[mid])              // x Ğ¡ÓÚÖĞ¼äÖµ£¬ÔòÈ¥×ó°ëÑ°ÕÒ
+        else if (x < A[mid])              // x å°äºä¸­é—´å€¼ï¼Œåˆ™å»å·¦åŠå¯»æ‰¾
             high = mid - 1;
-        else                              // x ´óÓÚÖĞ¼äÖµ£¬ÔòÈ¥ÓÒ°ëÑ°ÕÒ
+        else                              // x å¤§äºä¸­é—´å€¼ï¼Œåˆ™å»å³åŠå¯»æ‰¾
             low = mid + 1;
     }
-    if (low <= high && mid != n - 1) {    // ²éÕÒµ½Ä¿±ê x£¬ÇÒ²»Îª±íÎ²£¬ÔòºÍºó¼ÌÔªËØ½»»»
+    if (low <= high && mid != n - 1) {    // æŸ¥æ‰¾åˆ°ç›®æ ‡ xï¼Œä¸”ä¸ä¸ºè¡¨å°¾ï¼Œåˆ™å’Œåç»§å…ƒç´ äº¤æ¢
         ElementType temp = A[mid];
         A[mid] = A[mid + 1];
         A[mid + 1] = temp;
     }
     int i;
-    if (low > high) {                     // Î´²éÕÒµ½£¬Ôò´Óºó±ß¿ªÊ¼ºóÒÆ£¬ÌÚ³öÎ»ÖÃ²åÈë x
+    if (low > high) {                     // æœªæŸ¥æ‰¾åˆ°ï¼Œåˆ™ä»åè¾¹å¼€å§‹åç§»ï¼Œè…¾å‡ºä½ç½®æ’å…¥ x
         for (i = n - 1; i > high; i--) 
             A[i + 1] = A[i];
         A[i + 1] = x;
-        n++;                              // ±í³¤¼ÓÒ» 
+        n++;                              // è¡¨é•¿åŠ ä¸€ 
     }
 }
 

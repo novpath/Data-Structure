@@ -1,10 +1,10 @@
 #include <stdio.h>
-#define MAXN 100001                      // ¸ù¾İÌâÄ¿nµÄ·¶Î§µ÷Õû
+#define MAXN 100001                      // æ ¹æ®é¢˜ç›®nçš„èŒƒå›´è°ƒæ•´
 
 int main() {
     int a, n;
-    int arr[MAXN] = {0};                 // ³õÊ¼»¯Êı×éÎª0
-    int carry = 0;                       // ½øÎ»
+    int arr[MAXN] = {0};                 // åˆå§‹åŒ–æ•°ç»„ä¸º0
+    int carry = 0;                       // è¿›ä½
     scanf("%d %d", &a, &n);
     
     if (n == 0) {
@@ -12,16 +12,16 @@ int main() {
         return 0;
     }
     
-    for (int i = 0; i < n; i++) {        // ¼ÆËãÃ¿Ò»Î»µÄºÍ²¢´¦Àí½øÎ»
+    for (int i = 0; i < n; i++) {        // è®¡ç®—æ¯ä¸€ä½çš„å’Œå¹¶å¤„ç†è¿›ä½
         int total = (n - i) * a + carry;
         arr[i] = total % 10;
         carry = total / 10;
     }
     
-    if (carry > 0)                       // ´¦Àí×î¸ßÎ»µÄ½øÎ»
+    if (carry > 0)                       // å¤„ç†æœ€é«˜ä½çš„è¿›ä½
         printf("%d", carry);
     
-    for (int i = n - 1; i >= 0; i--)     // ÄæĞòÊä³öÊı×éÖĞµÄÃ¿Ò»Î»
+    for (int i = n - 1; i >= 0; i--)     // é€†åºè¾“å‡ºæ•°ç»„ä¸­çš„æ¯ä¸€ä½
         printf("%d", arr[i]);
     
     return 0;
