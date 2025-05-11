@@ -4,3 +4,8 @@
 *.tmp
 *.obj
 *.psd
+
+
+.idea/
+cmake-build-debug/
+CMakeLists.txt
