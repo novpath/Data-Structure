@@ -28,6 +28,10 @@ int main()
 	printf("%d\n", IsLegalSequence("IOOIOIIO"));
 	printf("%d\n", IsLegalSequence("IIIOIOIO"));
 	printf("%d\n", IsLegalSequence("IIIOOIOO"));
+    printf("%d\n", IsLegalSequence("IIIOOIOOIO"));
+    printf("%d\n", IsLegalSequence("IIIOOIOOI"));
+    printf("%d\n", IsLegalSequence("IIIIIIIIIIOIIOOOOOOOOOOO"));
+    printf("%d\n", IsLegalSequence("IIIOOIOOO"));
 
     return 0;
 }
