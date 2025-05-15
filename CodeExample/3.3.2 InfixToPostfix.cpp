@@ -1,8 +1,6 @@
 #include <stdio.h>
-
 #define MaxSize 100
 typedef char ElementType;
-
 typedef struct {
     ElementType data[MaxSize]; // 静态数组存放栈中元素
     int top;                   // 栈顶指针
@@ -55,7 +53,7 @@ int GetPriority(char op) { // 获取运算符优先级
     }
 }
 
-void InfixToPostfix(const char* infix, char* postfix)    // 中缀转后缀函数
+void InfixToPostfix(char* infix, char* postfix)    // 中缀转后缀函数
 {
     SqStack S;
     InitStack(S);
@@ -74,6 +72,7 @@ void InfixToPostfix(const char* infix, char* postfix)    // 中缀转后缀函�
                 } else {
                     Pop(S, top);
                     postfix[postIndex++] = top;
+                    postfix[postIndex++] = ' ';
                 }
             }
         } else if (c == '+' || c == '-' || c == '*' || c == '/') { // 处理运算符优先级
@@ -83,13 +82,19 @@ void InfixToPostfix(const char* infix, char* postfix)    // 中缀转后缀函�
                 if (top != '(' && GetPriority(top) >= GetPriority(c)) {
                     Pop(S, top);
                     postfix[postIndex++] = top;
+                    postfix[postIndex++] = ' ';
                 } else {
                     break;
                 }
             }
             Push(S, c);
-        } else { // 操作数直接加入后缀表达式
-            postfix[postIndex++] = c;
+        } else {     // 操作数直接加入后缀表达式
+            while (infix[i] >= '0' && infix[i] <= '9' || infix[i] == '.'){
+                postfix[postIndex++] = infix[i];
+                i++;
+            }
+            postfix[postIndex++] = ' ';
+            i--;
         }
     }
 
@@ -97,16 +102,16 @@ void InfixToPostfix(const char* infix, char* postfix)    // 中缀转后缀函�
         char top;
         Pop(S, top);
         postfix[postIndex++] = top;
+        postfix[postIndex++] = ' ';
     }
-    postfix[postIndex] = '\0'; // 字符串结束符
+    postfix[postIndex - 1] = '\0'; // 字符串结束符
 }
 
 int main()
 {
     char infix[MaxSize], postfix[MaxSize];
-    printf("Please input infix expression:");
     scanf("%s", infix);
     InfixToPostfix(infix, postfix);
-    printf("Postfix expression is: %s\n", postfix);
+    printf("%s", postfix);
     return 0;
 }
