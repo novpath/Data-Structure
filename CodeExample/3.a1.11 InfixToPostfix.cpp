@@ -48,7 +48,7 @@ int GetPriority(char op) { // 获取运算符优先级
     }
 }
 
-void InfixToPostfix(char* infix, char* postfix) {
+void InfixToPostfix(const char* infix, char* postfix) {
     SqStack S;
     InitStack(S);
     int postIndex = 0;
@@ -63,11 +63,10 @@ void InfixToPostfix(char* infix, char* postfix) {
                 if (top == '(') {
                     Pop(S, top);
                     break;
-                } else {
-                    Pop(S, top);
-                    postfix[postIndex++] = top;
-                    postfix[postIndex++] = ' ';
                 }
+                Pop(S, top);
+                postfix[postIndex++] = top;
+                postfix[postIndex++] = ' ';
             }
         } else if (c == '+' || c == '-' || c == '*' || c == '/') {
             bool isUnary = false;       // 检查是否为单目运算符

@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-bool IsLegalSequence(char a[])
+bool IsLegalSequence(const char a[])
 {
     int num_I = 0, num_O = 0;
     int i = 0, flag = 1;

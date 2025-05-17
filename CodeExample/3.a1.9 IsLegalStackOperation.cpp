@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void IsLegalStackOperation(char a[], int m)
+void IsLegalStackOperation(const char a[], int m)
 {
     int num_I = 0, num_O = 0;
     int i = 0, flag = 1;

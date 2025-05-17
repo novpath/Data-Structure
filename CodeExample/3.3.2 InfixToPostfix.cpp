@@ -53,7 +53,7 @@ int GetPriority(char op) { // 获取运算符优先级
     }
 }
 
-void InfixToPostfix(char* infix, char* postfix)    // 中缀转后缀函数
+void InfixToPostfix(const char* infix, char* postfix)    // 中缀转后缀函数
 {
     SqStack S;
     InitStack(S);
@@ -69,11 +69,10 @@ void InfixToPostfix(char* infix, char* postfix)    // 中缀转后缀函数
                 if (top == '(') {
                     Pop(S, top);
                     break;
-                } else {
-                    Pop(S, top);
-                    postfix[postIndex++] = top;
-                    postfix[postIndex++] = ' ';
                 }
+                Pop(S, top);
+                postfix[postIndex++] = top;
+                postfix[postIndex++] = ' ';
             }
         } else if (c == '+' || c == '-' || c == '*' || c == '/') { // 处理运算符优先级
             while (!StackEmpty(S)) {

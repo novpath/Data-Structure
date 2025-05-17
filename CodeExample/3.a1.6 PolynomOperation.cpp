@@ -101,6 +101,7 @@ LinkList Mult(LinkList P1, LinkList P2)
 
 void PrintPoly(LinkList P)
 {
+    if (!P) return;
     LinkList p = P->next;
     if (p == NULL) {
         printf("0 0\n");
@@ -136,6 +137,8 @@ int main()
 
     FreePoly(PS);
     FreePoly(PP);
+    FreePoly(P1);
+    FreePoly(P2);
 
     return 0;
 }
