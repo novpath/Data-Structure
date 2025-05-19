@@ -22,14 +22,15 @@ bool Enqueue(SqStack &S1, SqStack &S2, ElementType x)
     } else {
         if (StackEmpty(S2)) {
             while (!StackEmpty(S1)) {
-                Pop(S1, x);
-                Push(S2, x);
+                ElementType e;
+                Pop(S1, e);
+                Push(S2, e);
             }
-        Push(S1, x);
-        return true;
+            Push(S1, x);
+            return true;
         } else {
-        printf("Queue is Full!\n");
-        return false;
+            printf("Queue is Full!\n");
+            return false;
         }
     }
 }
@@ -50,6 +51,7 @@ bool Dequeue(SqStack &S1, SqStack &S2, ElementType &x)
             Pop(S2, x);
         }
     }
+    return true;
 }
 
 bool QueueEmpty(SqStack &S1, SqStack &S2)
