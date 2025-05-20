@@ -1,20 +1,12 @@
 #include <stdio.h>
-#define MaxSize 100
-typedef char ElementType;
+#include <stdlib.h>
+#include <math.h>
+#define MaxSize 31
+typedef double ElementType;
 typedef struct {
     ElementType data[MaxSize]; // 静态数组存放栈中元素
     int top;                   // 栈顶指针
 } SqStack;
-
-void InitStack(SqStack &S)
-{
-    S.top = -1;            // 初始化栈顶指针
-}
-
-bool StackEmpty(const SqStack &S)
-{
-    return S.top == -1;
-}
 
 bool Push(SqStack &S, ElementType x)
 {
@@ -32,45 +24,89 @@ bool Pop(SqStack &S, ElementType &x)
     return true;
 }
 
-bool GetTop(const SqStack &S, ElementType &x)
+bool IsNum(char c)
 {
-    if (S.top == -1)        // 栈空，报错
-        return false;
-    x = S.data[S.top];      // x 记录栈顶元素
-    return true;
+    if (c >= '0' && c <= '9' || c == '.')
+        return true;
+    return false;
+}
+
+bool IsOperator(char c)
+{
+    if (c == '+' || c == '-' || c == '*' || c == '/')
+        return true;
+    return false;
+}
+
+bool IsSignBit (char c)
+{
+    if (c == '+' || c == '-')
+        return true;
+    return false;
 }
 
 double CalculatePrefix(const char* prefix)    // 前缀表达式求值
 {
     SqStack S;
+    S.top = -1;
     double ret = 0;
-    int i = 0, cnt = 0;
-    while (prefix[i] != '\0')
+    int i = 0;
+    while (prefix[i + 1] != '\0')
         i++;
+    int cnt = 0;
+    double num = 0;
     while (i >= 0) {
-        if (prefix[i] >= '0' && prefix[i] <= '9') {
-            while (prefix[i - cnt] >= '0' && prefix[i - cnt] <= '9') {
+        if (IsNum(prefix[i])) {
+            if (prefix[i] != '.') {
+                num += (prefix[i] - '0') * pow(10, cnt);
                 cnt++;
+            } else {
+                num /= pow(10, cnt);
+                cnt = 0;
             }
-            double num = 0;
-            for (int j = 0; j < cnt; j++) {
-                num = 10 * num + prefix[i + cnt - j] - '0';
+            if (i == 0 || prefix[i - 1] == ' ') {
+                Push(S, num);
+                num = cnt = 0;
             }
-            Push(S, num);
-        } else {
-            double result, a, b;
-            Pop(S, a);
-            Pop(S,b);
+            if (IsSignBit(prefix[i - 1])) {
+                if (prefix[i - 1] == '-' && num != 0)
+                    num = -num;
+                Push(S, num);
+                num = cnt = 0;
+                i--;
+            }
+        } else if (IsOperator(prefix[i])) {
+            double result = 0, X = 0, Y = 0;
+            Pop(S, X);
+            Pop(S,Y);
+            switch (prefix[i]) {
+                case '+': result = X + Y; break;
+                case '-': result = X - Y; break;
+                case '*': result = X * Y; break;
+                case '/': {
+                    if (Y == 0) {
+                        printf("ERROR\n");
+                        exit(0);
+                    }
+                    result = X / Y; break;
+                }
+                default: break;
+            }
+            Push(S, result);
         }
-        i++;
+        i--;
     }
+    Pop(S, ret);
     return ret;
 }
 
 int main()
 {
     char prefix[MaxSize];
-    scanf("[^\n]", prefix);
-    printf("%f", CalculatePrefix(prefix));
+    int i = 0;
+    while ((prefix[i] = getchar()) != '\n')
+        i++;
+    prefix[i] = '\0';
+    printf("%.1lf\n", CalculatePrefix(prefix));
     return 0;
 }
