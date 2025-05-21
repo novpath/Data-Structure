@@ -6,7 +6,7 @@ typedef struct {
     int length; // 串的实际长度
 } SString;
 
-bool SubString(SString &Sub, SString S, int pos, int len)
+bool SubString(SString &Sub, const SString &S, int pos, int len)
 {
     if (pos + len - 1 > S.length) // 子串范围越界
         return false;
@@ -16,7 +16,7 @@ bool SubString(SString &Sub, SString S, int pos, int len)
     return true;
 }
 
-int StrCompare(SString S, SString T)
+int StrCompare(const SString &S, const SString &T)
 {
     for (int i = 1; i <= S.length && i <= T.length; i++) {
         if (S.ch[i] != T.ch[i])
@@ -25,7 +25,7 @@ int StrCompare(SString S, SString T)
     return S.length - T.length;
 }
 
-int Index(const SString &S, SString T)
+int Index(const SString &S, const SString &T)
 {
     int i = 1, n = S.length, m = T.length;
     SString sub; // 用于暂存子串
