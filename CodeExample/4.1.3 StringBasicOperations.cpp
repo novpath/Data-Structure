@@ -41,7 +41,7 @@ int Index(const SString &S, const SString &T)
 
 int main()
 {
-    int str[100];
-    scanf("%s", str);
+    SString Str;
+    Str.length = 0;
     return 0;
 }

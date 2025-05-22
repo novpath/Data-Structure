@@ -2,7 +2,7 @@
 #define MaxLen 255 // 预定义最大串长为 255
 
 typedef struct {
-    char ch[MaxLen]; // 每个分量存储一个字符
+    char ch[MaxLen]; // 每个分量存储多个字符
     int length; // 串的实际长度
 } SString;
 
@@ -66,14 +66,15 @@ void GetNextval(const SString &T, int nextval[])
                 nextval[i] = j;
             else
                 nextval[i] = nextval[j];
-        } else
+        } else {
             j = nextval[j];
+        }
     }
 }
 
 int main()
 {
-    int str[100];
-    scanf("%s", str);
+    SString Str;
+    Str.length = 0;
     return 0;
 }
