@@ -1,47 +1,52 @@
 #include <stdio.h>
-#define MaxLen 255      // 预定义最大串长为 255
+#include <stdlib.h>
+struct ElementType {
+    int value;
+};
 
-typedef struct {
-    char ch[MaxLen]; // 每个分量存储一个字符
-    int length; // 串的实际长度
-} SString;
+typedef struct BiTNode {
+    ElementType data; // 数据域
+    struct BiTNode *lchild, *rchild; // 左、右孩子指针
+} BiTNode, *BiTree;
 
-bool SubString(SString &Sub, SString S, int pos, int len)
+void PostOrder(BiTree T)
 {
-    if (pos + len - 1 > S.length) // 子串范围越界
-        return false;
-    for (int i = pos; i < pos + len; i++)
-        Sub.ch[i - pos + 1] = S.ch[i];
-    Sub.length = len;
-    return true;
+    if (T != NULL) {
+        PostOrder(T->lchild); // 递归遍历左子树
+        PostOrder(T->rchild); // 递归遍历右子树
+        visit(T); // 访问根结点
+    }
 }
 
-int StrCompare(SString S, SString T)
+void LevelOrder(BiTree T)
 {
-    for (int i = 1; i <= S.length && i <= T.length; i++) {
-        if (S.ch[i] != T.ch[i])
-            return S.ch[i] - T.ch[i];
+    InitQueue(Q); // 初始化辅助队列
+    BiTree p;
+    EnQueue(Q, T); // 将根结点入队
+    while (!IsEmpty(Q)) { // 队列不空则循环
+        DeQueue(Q, p); // 队头结点出队
+        visit(p); // 访问出队结点
+        if (p->lchild != NULL)
+            EnQueue(Q, p->lchild); // 若左孩子不空, 则左孩子入队
+        if (p->rchild != NULL)
+            EnQueue(Q, p->rchild); // 若右孩子不空, 则右孩子入队
     }
-    return S.length - T.length;
-}
-
-int Index(const SString &S, SString T)
-{
-    int i = 1, n = S.length, m = T.length;
-    SString sub; // 用于暂存子串
-    while (i <= n - m + 1) {
-        SubString(sub, S, i, m);
-        if (StrCompare(sub, T) != 0)
-            ++i;
-        else
-            return i; // 返回子串在主串中的位置
-    }
-    return 0; // S 中不存在与 T 相等的子串
 }
 
 int main()
 {
-    int str[100];
-    scanf("%s", str);
+    // 定义一棵空树
+    BiTree root = NULL;
+
+    // 插入根节点
+    root = (BiTree) malloc(sizeof(BiTNode));
+    root->lchild = NULL;
+    root->rchild = NULL;
+    // 插入新结点 2
+    BiTNode *p = (BiTNode *) malloc(sizeof(BiTNode));
+    p->data = {2};
+    p->lchild = NULL;
+    p->rchild = NULL;
+    root->lchild = p; // 作为根节点的左孩子
     return 0;
 }
