@@ -9,27 +9,28 @@ typedef struct BiTNode {
     struct BiTNode *lchild, *rchild; // 左、右孩子指针
 } BiTNode, *BiTree;
 
-void PostOrder(BiTree T)
+
+// 辅助全局变量，用于查找结点 p 的前驱
+BiTNode *p; // p 指向目标结点
+BiTNode *pre = NULL; // 指向当前访问结点的前驱
+BiTNode *final = NULL; // 用于记录最终结果
+
+// 访问结点 q
+void visit(BiTNode *q)
 {
-    if (T != NULL) {
-        PostOrder(T->lchild); // 递归遍历左子树
-        PostOrder(T->rchild); // 递归遍历右子树
-        visit(T); // 访问根结点
-    }
+    if (q == p) // 当前访问结点刚好是 p
+        final = pre; // 找到 p 的前驱
+    else
+        pre = q; // pre 指向当前访问结点
 }
 
-void LevelOrder(BiTree T)
+// 中序遍历
+void InOrder(BiTree T)
 {
-    InitQueue(Q); // 初始化辅助队列
-    BiTree p;
-    EnQueue(Q, T); // 将根结点入队
-    while (!IsEmpty(Q)) { // 队列不空则循环
-        DeQueue(Q, p); // 队头结点出队
-        visit(p); // 访问出队结点
-        if (p->lchild != NULL)
-            EnQueue(Q, p->lchild); // 若左孩子不空, 则左孩子入队
-        if (p->rchild != NULL)
-            EnQueue(Q, p->rchild); // 若右孩子不空, 则右孩子入队
+    if (T != NULL) {
+        InOrder(T->lchild);
+        visit(T);
+        InOrder(T->rchild);
     }
 }
 
