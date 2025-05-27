@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 struct ElementType {
     int value;
 };
@@ -9,6 +10,15 @@ typedef struct BiTNode {
     struct BiTNode *lchild, *rchild; // 左、右孩子指针
 } BiTNode, *BiTree;
 
+typedef struct node {
+    char data[10];
+    struct node *left, *right;   // 存储操作数或操作符
+} BTree;
+
+typedef struct {              // MAX SIZE 为已定义常量
+    int SqBiTNode[MAX_SIZE];  // 保存二叉树结点值的数组
+    int ElemNum;              // 实际占用的数组元素个数 SqBiTree;
+} SqBiTNode;
 
 // 辅助全局变量，用于查找结点 p 的前驱
 BiTNode *p; // p 指向目标结点
