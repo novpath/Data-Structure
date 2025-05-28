@@ -9,4 +9,4 @@
 .idea/
 cmake-build-debug/
 CMakeLists.txt
-0_test.cpp
+00test.cpp
