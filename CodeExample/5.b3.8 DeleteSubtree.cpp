@@ -25,9 +25,10 @@ void DeleteSubtree(BiTree &T)
     DeleteSubtree(T->lchild);   // 删除左子树
     DeleteSubtree(T->rchild);   // 删除右子树
     free(T);                        // 删除根结点
+    T = NULL;                       // 置空 T 指针
 }
 
-void DeleteXSubtree(BiTree T, const int x)
+void DeleteXSubtree(BiTree &T, const int x)
 {
     SqQueue Q;
     if (T == NULL)
@@ -74,7 +75,7 @@ BiTree CreateTree()
 {
     BiTNode *nodes[7];
     for (int i = 0; i < 7; i++) {
-        nodes[i] = (BiTNode *) malloc(sizeof(BiTNode));
+        nodes[i] = static_cast<BiTree>(malloc(sizeof(BiTNode)));
         nodes[i]->data = i + 1;
         nodes[i]->lchild = NULL;
         nodes[i]->rchild = NULL;
@@ -91,8 +92,8 @@ BiTree CreateTree()
 void PrintTree()
 {
     // 定义每行的宽度和行数
-    const int width = 15; // 足够容纳最底层的节点
-    const int rows = 5;
+    constexpr int width = 15; // 足够容纳最底层的节点
+    constexpr int rows = 5;
     char output[rows][width];
     // 初始化输出数组为空格
     for (int i = 0; i < rows; i++) {
