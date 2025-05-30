@@ -52,6 +52,7 @@ void AncestorsOfXNode(BiTree root, ElementType x)
             } else {
                 S.top--;
                 lastVisited = topNode;
+                p = NULL;
             }
         }
     }
@@ -72,48 +73,113 @@ int main()
     return 0;
 }
 
-void PrintBinaryTree(BiTree root)
+BiTree CreateBiTree(const char input[])
 {
-    char canvas[2 * TREE_HEIGHT - 1][PRINT_WIDTH + 1];
-    for (auto &canva: canvas) {
-        memset(canva, ' ', PRINT_WIDTH);
-        canva[PRINT_WIDTH] = '\0';
+    // 分割输入字符串为逗号分隔的数组
+    char elements[MaxSize][2]; // 存储每个分割的元素
+    int elem_count = 0;
+
+    const char *delim = ",";
+    char input_copy[MaxSize];
+    strncpy(input_copy, input, MaxSize); // 复制输入字符串
+
+    char *token = strtok(input_copy, delim);
+    while (token != nullptr && elem_count < MaxSize) {
+        strncpy(elements[elem_count], token, 2); // 避免溢出
+        elem_count++;
+        token = strtok(nullptr, delim);
     }
+
+    if (elem_count == 0 || elements[0][0] == '#')
+        return nullptr;
+
+    // 创建根节点
+    auto root = static_cast<BiTree>(malloc(sizeof(BiTNode)));
+    root->data = elements[0][0];
+    root->lchild = root->rchild = nullptr;
 
     SqQueue Q;
     InitQueue(Q);
     EnQueue(Q, root);
 
-    int level = 0;
+    int index = 1; // 当前处理的元素索引
 
-    // 节点位置记录
-    while (!IsQueueEmpty(Q) && level < TREE_HEIGHT) {
-        int level_size = 1 << level;
-        int spacing = PRINT_WIDTH / (level_size + 1);
+    while (!IsQueueEmpty(Q) && index < elem_count) {
+        BiTree parent;
+        DeQueue(Q, parent);
 
-        for (int i = 0; i < level_size; i++) {
-            BiTree node;
-            if (!DeQueue(Q, node)) break;
+        // 处理左子节点
+        if (index < elem_count && elements[index][0] != '#') {
+            auto left = static_cast<BiTree>(malloc(sizeof(BiTNode)));
+            left->data = elements[index][0];
+            left->lchild = left->rchild = nullptr;
+            parent->lchild = left;
+            EnQueue(Q, left);
+        }
+        index++;
 
+        // 处理右子节点
+        if (index < elem_count && elements[index][0] != '#') {
+            auto right = static_cast<BiTree>(malloc(sizeof(BiTNode)));
+            right->data = elements[index][0];
+            right->lchild = right->rchild = nullptr;
+            parent->rchild = right;
+            EnQueue(Q, right);
+        }
+        index++;
+    }
+
+    return root;
+}
+
+void PrintBinaryTree(BiTree root)
+{
+    char canvas[2 * TREE_HEIGHT - 1][PRINT_WIDTH + 1];
+    for (auto &row: canvas) {
+        memset(row, ' ', PRINT_WIDTH);
+        row[PRINT_WIDTH] = '\0';
+    }
+
+    BiTree current_level[1 << TREE_HEIGHT];             // 当前层节点数组
+    int current_size = 0;
+    current_level[current_size++] = root;               // 初始为根节点
+
+    for (int level = 0; level < TREE_HEIGHT; ++level) {
+        int level_nodes = 1 << level;                   // 当前层应有的节点数
+        int spacing = PRINT_WIDTH / (level_nodes + 1);
+        bool has_non_null = false;
+
+        for (int i = 0; i < level_nodes; ++i) {
+            BiTree node = (i < current_size) ? current_level[i] : nullptr;
             int pos = spacing * (i + 1) - 1;
 
             if (node) {
-                canvas[2 * level][pos - 1] = node->data;
-                EnQueue(Q, node->lchild);
-                EnQueue(Q, node->rchild);
+                canvas[2 * level][pos] = node->data;
+                has_non_null = true;
             } else {
-                canvas[2 * level][pos] = '#';
-                EnQueue(Q, NULL);
-                EnQueue(Q, NULL);
+                canvas[2 * level][pos] = '#';        // 空节点显示为#
             }
         }
-        level++;
+
+        if (!has_non_null) break;                    // 当前层全为空，无需继续
+        BiTree next_level[1 << (TREE_HEIGHT + 1)];   // 生成下一层节点数组
+        int next_size = 0;
+        for (int i = 0; i < current_size; ++i) {
+            if (BiTree node = current_level[i]) {
+                next_level[next_size++] = node->lchild;
+                next_level[next_size++] = node->rchild;
+            } else {
+                next_level[next_size++] = nullptr;
+                next_level[next_size++] = nullptr;
+            }
+        }
+
+        current_size = next_size;                                       // 更新当前层信息
+        memcpy(current_level, next_level, sizeof(BiTree) * next_size);
     }
 
-    // 打印结果
-    for (auto &canva: canvas)
+    for (auto &canva: canvas)   // 打印画布
         printf("%s\n", canva);
-    printf("\n");
 }
 
 // 队列操作函数
@@ -143,42 +209,4 @@ int DeQueue(SqQueue &Q, BiTree &elem)
     return 1;
 }
 
-BiTree CreateBiTree(const char input[])
-{
-    if (input[0] == '\0')
-        return NULL;
-    // 创建根节点
-    auto root = static_cast<BiTree>(malloc(sizeof(BiTNode)));
-    root->data = input[0];
-    root->lchild = root->rchild = NULL;
 
-    SqQueue Q;
-    InitQueue(Q);
-    EnQueue(Q, root);
-
-    int index = 1;
-
-    // 层序构建二叉树
-    while (input[index] != '\0') {
-        BiTree temp;
-        DeQueue(Q, temp);
-        // 处理左子树
-        if (input[index] == ',')
-            index++;
-
-        temp->lchild = static_cast<BiTree>(malloc(sizeof(BiTNode)));
-        temp->lchild->data = input[index];
-        temp->lchild->lchild = temp->lchild->rchild = NULL;
-        EnQueue(Q, temp->lchild);
-        index++;
-        // 处理右子树
-        if (input[index] == ',')
-            index++;
-        temp->rchild = static_cast<BiTree>(malloc(sizeof(BiTNode)));
-        temp->rchild->data = input[index];
-        temp->rchild->lchild = temp->rchild->rchild = NULL;
-        EnQueue(Q, temp->rchild);
-        index++;
-    }
-    return root;
-}

@@ -58,10 +58,11 @@ void PostorderNonRecursion(BiTree T)
             BiTree topNode = GetTop(S);
             if (topNode->rchild && topNode->rchild != lastVisited) {
                 p = topNode->rchild;     // 转向右子树
-            } else {
+            } else {                     // 右孩子为空或者右孩子访问完了可以访问结点
                 Pop(S, topNode); // 访问节点
                 visit(topNode);
                 lastVisited = topNode;
+                p = NULL;                // 处理完结点强制置空，通过栈返回上层避免结点重新入栈死循环
             }
         }
     }

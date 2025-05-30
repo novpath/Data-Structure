@@ -16,19 +16,20 @@ void visit(BiTree T)
     printf("%d ", T->data);
 }
 
-void InorderNonRecursion(BiTree T)
+void InOrderNonRecursion(BiTree T)
 {
-    BiTree bt = T;
+    BiTree p = T;
     SqStack S;
     S.top = -1;
-    while (bt || S.top != -1) {
-        while (bt) {
-            S.data[++S.top] = bt;
-            bt = bt->lchild;
+    while (p || S.top != -1) {
+        if (p) {
+            S.data[++S.top] = p;
+            p = p->lchild;
+        } else {
+            p = S.data[S.top--];
+            visit(p);
+            p = p->rchild;
         }
-        bt = S.data[S.top--];
-        visit(bt);
-        T = T->rchild;
     }
 }
 
