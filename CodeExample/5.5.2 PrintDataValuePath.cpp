@@ -17,7 +17,7 @@ void PrintDataValuePath(BiTree T, int &k, const int data)
         return;
     path[k++] = T->data;  // 经过的节点存入路径数组中
     sum += T->data;
-    if (sum == data) {
+    if (sum == data && !T->lchild && !T->rchild) {
         int i = 0;
         while (i < k) {
             printf("%d ", path[i]);
