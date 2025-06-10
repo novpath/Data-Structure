@@ -13,7 +13,7 @@ typedef struct BiTNode {
 
 BiTree TreeSpeciesStatics(BiTree T, ElementType name)
 {
-    if (T == NULL) {
+    if (!T) {
         T = (BiTree) malloc(sizeof(BiTNode));
         strcpy(T->name, name);
         T->cnt = 1;
@@ -42,13 +42,11 @@ void InOrder(BiTree T)
 
 int main()
 {
-    scanf("%d", &n);
+    scanf(" %d", &n);
     BiTree T = NULL;
-    getchar();
     for (int i = 0; i < n; i++) {
         ElementType name;
-        scanf("%31[^\n]", name);
-        getchar();
+        scanf(" %31[^\n]", name);
         T = TreeSpeciesStatics(T, name);
     }
     InOrder(T);
