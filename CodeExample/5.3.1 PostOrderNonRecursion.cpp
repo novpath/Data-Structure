@@ -55,13 +55,13 @@ void PostorderNonRecursion(BiTree T)
             Push(S, p);
             p = p->lchild;               // 走到最左边
         } else {
-            BiTree topNode = GetTop(S);
-            if (topNode->rchild && topNode->rchild != lastVisited) {
-                p = topNode->rchild;     // 转向右子树
+            p = GetTop(S);               // 只看栈顶，并不真正出栈
+            if (p->rchild && p->rchild != lastVisited) {
+                p = p->rchild;     // 转向右子树
             } else {                     // 右孩子为空或者右孩子访问完了可以访问结点
-                Pop(S, topNode); // 访问节点
-                visit(topNode);
-                lastVisited = topNode;
+                Pop(S, p); // 访问节点
+                visit(p);
+                lastVisited = p;
                 p = NULL;                // 处理完结点强制置空，通过栈返回上层避免结点重新入栈死循环
             }
         }
