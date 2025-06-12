@@ -67,6 +67,7 @@ int main()
         char path[MaxLen];
         scanf("%s", path);
 
+        int lastSlash = path[strlen(path) - 1] == '\\';
         char *parts[100];
         int part_count = 0;
         char *token = strtok(path, "\\");
@@ -76,7 +77,6 @@ int main()
         }
 
         BiTree current = root;
-        int lastSlash = path[strlen(path) - 1] == '\\';
         for (int j = 0; j < part_count; ++j) {
             int isdir = (j != part_count - 1) || lastSlash;
             current = insert(current, parts[j], isdir);
