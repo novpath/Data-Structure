@@ -22,7 +22,7 @@ BiTree insert(BiTree root, const char *name, int isdir)
 {
     if (root == nullptr) return nullptr;
 
-    BiTree prev = nullptr;
+    BiTree prev = root;
     BiTree curr = root->child;
     while (curr != nullptr &&
            (curr->isdir > isdir ||
@@ -36,8 +36,8 @@ BiTree insert(BiTree root, const char *name, int isdir)
     BiTree newNode = createNode(name, isdir);
     newNode->sib = curr;
 
-    if (prev == nullptr) {
-        root->child = newNode;
+    if (prev == root) {
+        prev->child = newNode;
     } else {
         prev->sib = newNode;
     }
