@@ -5,7 +5,7 @@ int S[SIZE];
 void Union(int S[], int Root1, int Root2)
 {
     if (Root1 == Root2) return;
-    if (Root2 > Root1) {
+    if (S[Root2] > S[Root1]) {
         S[Root1] += S[Root2];
         S[Root2] = Root1;
     } else {
