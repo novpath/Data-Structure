@@ -11,7 +11,7 @@ void Initial(int S[])
 
 int Find(int S[], int x)
 {
-    while (S[x] > 0)     // 循环寻找x的根
+    while (S[x] >= 0)     // 循环寻找x的根
         x = S[x];
     return x;            // 根的S[]小于0
 }
