@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <cmath>
 #define MaxSize 1001
-#define NULL nullptr
 
 int min(int a, int b)
 {
