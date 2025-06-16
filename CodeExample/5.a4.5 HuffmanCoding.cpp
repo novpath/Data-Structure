@@ -12,7 +12,6 @@ typedef struct HuffmanNode {
     struct HuffmanNode *left, *right;
 } HNode, *HuffmanTree;
 
-HuffmanTree H;
 int size, n;
 int weightArr[MaxCodeLen];
 
@@ -65,14 +64,10 @@ HuffmanTree *CreateMinHeap()
     H[0]->weight = MINH;
     H[0]->left = H[0]->right = NULL;
     for (int i = 1; i <= n; i++) {
-        char ch;
-        int weight;
-        scanf(" %c %d", &ch, &weight);
-        weightArr[i] = weight;
         HuffmanTree node = (HuffmanTree) malloc(sizeof(HNode));
-        node->ch = ch;
-        node->weight = weight;
         node->left = node->right = NULL;
+        scanf(" %c %d", &node->ch, &node->weight);
+        weightArr[i] = node->weight;
         Insert(node, H);
     }
 
@@ -81,8 +76,8 @@ HuffmanTree *CreateMinHeap()
 
 HuffmanTree BuildHuffmanTree(HuffmanTree H[])
 {
-    int mergeNum = size;
-    for (int i = 1; i < mergeNum; i++) {
+    int TreeNum = size;
+    for (int i = 1; i < TreeNum; i++) {
         HuffmanTree T = (HuffmanNode *) malloc(sizeof(HNode));
         T->left = Delete(H);
         T->right = Delete(H);
@@ -105,11 +100,9 @@ void DeleteSubtree(HuffmanTree &T)
 void Check(int MinWPL, HuffmanTree H[])
 {
     int m;
-    int IsShortestWPL, IsPreFixCode;
     scanf("%d", &m);
     for (int i = 0; i < m; i++) {
-        int codeLen = 0;
-        IsShortestWPL = 0, IsPreFixCode = 1;
+        int codeLen = 0, IsShortestWPL = 0, IsPreFixCode = 1;
         HuffmanTree p = (HuffmanTree) malloc(sizeof(HNode));
         p->weight = 0;
         p->left = p->right = NULL;
@@ -144,11 +137,12 @@ void Check(int MinWPL, HuffmanTree H[])
                     }
                     p = p->right;
                 }
-                if (code[k + 1] == '\0')
+                if (code[k + 1] == '\0') {
                     p->weight = weightArr[j];
-                if (!CreateNodeFlag && code[k + 1] == '\0') {
-                    IsPreFixCode = 0;
-                    break;
+                    if (!CreateNodeFlag) {
+                        IsPreFixCode = 0;
+                        break;
+                    }
                 }
                 k++;
             }
