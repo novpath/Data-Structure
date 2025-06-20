@@ -25,7 +25,6 @@ void AddEdge(ALGraph &G, int v, int w);
 ALGraph CreateGraph(int vexnum, int arcnum);
 void DestroyGraph(ALGraph &G);
 
-
 int visited[MaxSize], path[MaxSize];
 
 void PrintSimplePath(const ALGraph &G, int u, int v, int scanLen)
