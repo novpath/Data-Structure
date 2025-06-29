@@ -38,7 +38,7 @@ bool IsEmpty(const Stack &S);
 int print[MaxSize];           // 记录拓扑排序序列
 int indegree[MaxSize];        // 记录每个顶点的出度
 
-bool ReverseTopologicalSort(const ALGraph &G)
+bool TopologicalSort(const ALGraph &G)
 {
     // 1. 初始化栈并添加所有入度为 0 的顶点
     Stack S;
@@ -81,7 +81,7 @@ int main()
             indegree[p->adjvex]++;            // 更新入度
     }
     // 执行拓扑排序
-    if (ReverseTopologicalSort(*G)) {
+    if (TopologicalSort(*G)) {
         printf("Topological Sort Sequence:");
         for (int i = 0; i < G->vexnum; i++)
             printf(" %d", print[i]);

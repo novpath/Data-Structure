@@ -75,7 +75,7 @@ void Dijkstra(MGraph G, int dist[], int cost[], VertexType s)
     dist[s] = cost[s] = 0;
     while (true) {
         VertexType v = -1;
-        for (VertexType w = 0; w < G->vexnum - 1; w++) {
+        for (VertexType w = 0; w < G->vexnum; w++) {
             if (!collected[w] && (v == -1 || dist[w] < dist[v]))
                 v = w;
         }
