@@ -58,7 +58,7 @@ int CriticalPath(ALGraph G)         // 关键路径计算（支持多起点多�
         ArcNode *p = G->vertices[v].firstarc;
         while (p != NULL) {
             int w = p->adjvex;
-            // 最早开始时间为所有前驱时间最早开始时间 + 任务时间的最大值
+            // 最早开始时间为所有前驱最早开始时间 + 任务时间的最大值
             G->vertices[w].ve = max(G->vertices[w].ve, G->vertices[v].ve + p->weight);
             if (--Indegree[w] == 0) {
                 Push(S, w);
