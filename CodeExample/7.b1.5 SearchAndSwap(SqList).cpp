@@ -10,16 +10,16 @@ typedef struct SqNode {
 
 int SearchAndSwap(SqList L, int x)
 {
-    int i = -1;
+    int i = 0;
     while (i < L->length && L->a[i] != x)
         i++;
-    if (i >= 1) {
+    if (i < L->length && i >= 1) {
         int t = L->a[i - 1];
         L->a[i - 1] = L->a[i];
         L->a[i] = t;
         i--;
     }
-    return i;
+    return i == L->length ? -1 : i;
 }
 
 int main()
