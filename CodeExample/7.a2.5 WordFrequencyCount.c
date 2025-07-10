@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define MAXTable 50000
+#define MAXTable 50021
 #define KEYLENGTH 15
 #define MAXWORDLEN 80
 
