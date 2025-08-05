@@ -13,7 +13,7 @@ void Merge(ElementType A[], int low, int mid, int high)
     int i, j, k;
     for (k = low; k <= high; k++)
         B[k] = A[k];             // 将 A 中所有元素复制到 B 中
-    for (i = low, j = mid + 1, k = i; ++cmpCnt && i <= mid && ++cmpCnt && j <= high; k++) {
+    for (i = low, j = mid + 1, k = i; i <= mid && j <= high; k++) {
         if (cmpCnt++ && B[i] <= B[j]) {
             // 比较B的两个段中的元素
             A[k] = B[i++];
